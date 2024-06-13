@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import BytecoinLogo from '../../../assets/BytecoinLogo.png'
 import { NavigationBlock } from "./NavigationBlock";
+import { MinerBlock } from "./MinerBlock";
 
 const Container = styled.div`
     width: 85%;
@@ -59,6 +60,7 @@ export const MainPage = () => {
                 <Logo src={BytecoinLogo} />
             </MainInfo>
             <NavigationBlock />
+            <MinerBlock />
         </Container>
     )
 }
