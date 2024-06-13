@@ -12,10 +12,17 @@
   <title>React App</title>
 </head>
 
+<script>
+  let tg = window.Telegram.WebApp;
+  tg.expand();
+  //tg.ThemeParams.secondary_bg_color = "#000";
+  window.Telegram.WebApp.setHeaderColor("#151314")
+</script>
+
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <style>
-    body{
+    body {
       margin: 0;
       font-family: "Public Sans", sans-serif;
       background: #151314;
