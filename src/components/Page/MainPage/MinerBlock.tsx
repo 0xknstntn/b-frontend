@@ -4,7 +4,7 @@ import BuyMoreMiners from '../../../assets/BuyMoreMiners.svg'
 const MainMinerContainer = styled.div`
     width: 100%;
     position: fixed;
-    bottom: 50px;
+    bottom: 0;
     left: 0;
     right: 0;
     display: flex;
@@ -19,6 +19,7 @@ const MyMinerContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 50px;
 `
 
 const GreyText = styled.a`
