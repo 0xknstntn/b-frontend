@@ -2,6 +2,7 @@ import styled from "styled-components";
 import DepositMiner from '../../../assets/DepositMiner.svg'
 import BuyBattery from '../../../assets/BuyBattery.svg'
 import Withdraw from '../../../assets/Withdraw.svg'
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
     width: 100%;
@@ -32,21 +33,34 @@ const LinkText = styled.a`
     margin-top: 10px;
 `
 
+const Links = styled(Link)`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+`
+
 
 export const NavigationBlock = () => {
     return (
         <Container>
             <LinkContainer>
-                <Logo src={DepositMiner} />
-                <LinkText>Deposit Miner</LinkText>
+                <Links to="/depositminer">
+                    <Logo src={DepositMiner} />
+                    <LinkText>Deposit Miner</LinkText>
+                </Links>
             </LinkContainer>
             <LinkContainer>
-                <Logo src={BuyBattery} />
-                <LinkText>Buy battery</LinkText>
+                <Links to="/buybattery">
+                    <Logo src={BuyBattery} />
+                    <LinkText>Buy battery</LinkText>
+                </Links>
             </LinkContainer>
             <LinkContainer>
-                <Logo src={Withdraw} />
-                <LinkText>Withdraw</LinkText>
+                <Links to="/withdraw">
+                    <Logo src={Withdraw} />
+                    <LinkText>Withdraw</LinkText>
+                </Links>
             </LinkContainer>
         </Container>
     )
