@@ -50,17 +50,19 @@ const MainInfo = styled.div`
 
 export const MainPage = () => {
     return (
-        <Container>
-            <MainInfo>
-                <MainInfoBlock>
-                    <MainText>Bytecoin</MainText>
-                    <Amount>0 BYTE</Amount>
-                    <AmountDescription>0 Mined today • 2 NFT ASIC</AmountDescription>
-                </MainInfoBlock>
-                <Logo src={BytecoinLogo} />
-            </MainInfo>
-            <NavigationBlock />
+        <>
+            <Container>
+                <MainInfo>
+                    <MainInfoBlock>
+                        <MainText>Bytecoin</MainText>
+                        <Amount>0 BYTE</Amount>
+                        <AmountDescription>0 Mined today • 2 NFT ASIC</AmountDescription>
+                    </MainInfoBlock>
+                    <Logo src={BytecoinLogo} />
+                </MainInfo>
+                <NavigationBlock />
+            </Container>
             <MinerBlock />
-        </Container>
+        </>
     )
 }

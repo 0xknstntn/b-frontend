@@ -3,10 +3,6 @@ import BuyMoreMiners from '../../../assets/BuyMoreMiners.svg'
 
 const MainMinerContainer = styled.div`
     width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
     display: flex;
     justify-content: center;
 `
@@ -15,11 +11,11 @@ const MyMinerContainer = styled.div`
     width: 90%;
     height: 200px;
     background: #1b1b1b;
-    border-radius: 10px;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 50px;
+    margin-top: 50px;
 `
 
 const GreyText = styled.a`
@@ -49,8 +45,8 @@ const AmountInfo = styled.div`
 `
 
 const BuyMiners = styled.img`
-    width: 140px;
-    height: 70px;
+    width: 130px;
+    height: 65px;
 `
 
 const LineReward = styled.div`
