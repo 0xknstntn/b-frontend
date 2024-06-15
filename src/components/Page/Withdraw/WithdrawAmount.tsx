@@ -125,7 +125,12 @@ export const WithdrawAmount = () => {
             </NameContainer>
             <AmountContainer>
                 <InputContainer>
-                    <Input value={text} style={{ maxWidth: `${text.length}ch` }} onChange={(e) => setText(e.target.value)} placeholder="0"></Input>
+                    <Input 
+                    value={text} 
+                    style={{ maxWidth: `${text.length}ch` }} 
+                    onChange={(e) => setText(e.target.value)} 
+                    type="Number"
+                    placeholder="0"></Input>
                     <WithdrawNameToken>BYTE</WithdrawNameToken>
                 </InputContainer>
                 <AmountOnBalance>0 BYTE on balance</AmountOnBalance>
