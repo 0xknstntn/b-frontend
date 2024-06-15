@@ -111,22 +111,7 @@ const ActiveConfirm = styled.button`
 export const WithdrawAmount = () => {
 
     const [text, setText] = useState('');
-
-    const inputRef = useRef<HTMLInputElement>(null);
-
-    useEffect(() => {
-        const handleResize = () => {
-            if (document.activeElement === inputRef.current) {
-                inputRef.current?.scrollIntoView({ behavior: 'smooth' });
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+    
 
     return (
         <>
@@ -143,8 +128,7 @@ export const WithdrawAmount = () => {
                                 style={{ maxWidth: `${text.length}ch` }}
                                 onChange={(e) => setText(e.target.value)}
                                 inputMode='numeric'
-                                placeholder="0"
-                                ref={inputRef}></Input>
+                                placeholder="0"></Input>
                             <WithdrawNameToken>BYTE</WithdrawNameToken>
                         </InputContainer>
                         <AmountOnBalance>0 BYTE on balance</AmountOnBalance>
