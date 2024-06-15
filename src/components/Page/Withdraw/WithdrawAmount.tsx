@@ -8,7 +8,6 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
     justify-content: space-between;
 `
 
@@ -80,6 +79,8 @@ const ButtonContainer = styled.div`
     height: 45px;
     display: flex;
     justify-content: center;
+    position: fixed;
+    bottom: 0;
 `
 
 const NonActiveConfirm = styled.button`
@@ -92,13 +93,11 @@ const NonActiveConfirm = styled.button`
     justify-content: center;
     align-items: center;
     font-size: 13px;
-    transition: background-color .2s ease-in-out;
 `
 
 const ActiveConfirm = styled.button`
     width: 100%;
     height: 45px;
-    border-radius: 10px;
     background-color: #0393ff;
     color: #fff;
     font-weight: 500;
@@ -106,7 +105,6 @@ const ActiveConfirm = styled.button`
     justify-content: center;
     align-items: center;
     font-size: 13px;
-    transition: background-color 2s ease-in-out;
 `
 
 
