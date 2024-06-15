@@ -8,6 +8,8 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100vh;
+    justify-content: space-between;
 `
 
 const NameContainer = styled.div`
@@ -78,7 +80,7 @@ const ButtonContainer = styled.div`
     height: 45px;
     display: flex;
     justify-content: center;
-    margin-top: 120%;
+    margin-bottom: 50px;
 `
 
 const NonActiveConfirm = styled.button`
