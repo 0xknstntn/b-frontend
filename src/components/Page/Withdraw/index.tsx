@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Laptop from '../../../assets/laptop.webp'
 import BytecoinLogo from '../../../assets/BytecoinLogo.png'
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
     width: 90%;
@@ -53,25 +54,37 @@ const Amount = styled.a`
     font-weight: 500;
 `
 
+const Links = styled(Link)`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+`
+
 
 export const Withdraw = () => {
-    return(
+    return (
         <Container>
-            <PageName>Choose the asset to <br/> withdraw</PageName>
-            <WithdrawContainer>
-                <Logo src={Laptop}/>
-                <WithdrawNameContainer>
-                    <WithdrawName>NFT ASIC</WithdrawName>
-                    <Amount>2 NFT</Amount>
-                </WithdrawNameContainer> 
-            </WithdrawContainer>
-            <WithdrawContainer>
-                <Logo src={BytecoinLogo}/>
-                <WithdrawNameContainer>
-                    <WithdrawName>Bytecoin</WithdrawName>
-                    <Amount>0 BYTE</Amount>
-                </WithdrawNameContainer> 
-            </WithdrawContainer>
+            <PageName>Choose the asset to <br /> withdraw</PageName>
+            <Links to="/withdrawamount">
+                <WithdrawContainer>
+                    <Logo src={Laptop} />
+                    <WithdrawNameContainer>
+                        <WithdrawName>NFT ASIC</WithdrawName>
+                        <Amount>2 NFT</Amount>
+                    </WithdrawNameContainer>
+                </WithdrawContainer>
+            </Links>
+            <Links to="/withdrawamount">
+                <WithdrawContainer>
+                    <Logo src={BytecoinLogo} />
+                    <WithdrawNameContainer>
+                        <WithdrawName>Bytecoin</WithdrawName>
+                        <Amount>0 BYTE</Amount>
+                    </WithdrawNameContainer>
+                </WithdrawContainer>
+            </Links>
         </Container>
     )
 }

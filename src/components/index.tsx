@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import { DepositMiner } from "./Page/DepositMiner/DepositMiner";
 import { BuyBattery } from "./Page/BuyBattery";
 import { Withdraw } from "./Page/Withdraw";
+import { WithdrawAmount } from "./Page/Withdraw/WithdrawAmount";
 
 const Container = styled.div`
     width: 100%;
@@ -24,6 +25,7 @@ export const Index = () => {
                 <Route path="/depositminer" element={<DepositMiner />} />
                 <Route path="/buybattery" element={<BuyBattery />} />
                 <Route path="/withdraw" element={<Withdraw />} />
+                <Route path="/withdrawamount" element={<WithdrawAmount />} />
             </Routes>
         </Container>
     )
