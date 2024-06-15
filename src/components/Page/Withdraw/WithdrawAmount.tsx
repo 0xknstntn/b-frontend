@@ -80,13 +80,11 @@ const ButtonContainer = styled.div`
     height: 45px;
     display: flex;
     justify-content: center;
-    margin-bottom: 50px;
 `
 
 const NonActiveConfirm = styled.button`
     width: 100%;
     height: 45px;
-    border-radius: 10px;
     background-color: #2f2f2f;
     color: #555;
     font-weight: 500;
@@ -117,28 +115,30 @@ export const WithdrawAmount = () => {
     const [text, setText] = useState('');
 
     return (
-        <Container>
-            <div style={{width: "100%"}}>
-                <NameContainer>
-                    <Logo src={BytecoinLogo} />
-                    <Name>Send to Your wallet</Name>
-                </NameContainer>
-                <AmountContainer>
-                    <InputContainer>
-                        <Input
-                            value={text}
-                            style={{ maxWidth: `${text.length}ch` }}
-                            onChange={(e) => setText(e.target.value)}
-                            inputMode='numeric'
-                            placeholder="0"></Input>
-                        <WithdrawNameToken>BYTE</WithdrawNameToken>
-                    </InputContainer>
-                    <AmountOnBalance>0 BYTE on balance</AmountOnBalance>
-                </AmountContainer>
-            </div>
+        <>
+            <Container>
+                <div style={{ width: "100%" }}>
+                    <NameContainer>
+                        <Logo src={BytecoinLogo} />
+                        <Name>Send to Your wallet</Name>
+                    </NameContainer>
+                    <AmountContainer>
+                        <InputContainer>
+                            <Input
+                                value={text}
+                                style={{ maxWidth: `${text.length}ch` }}
+                                onChange={(e) => setText(e.target.value)}
+                                inputMode='numeric'
+                                placeholder="0"></Input>
+                            <WithdrawNameToken>BYTE</WithdrawNameToken>
+                        </InputContainer>
+                        <AmountOnBalance>0 BYTE on balance</AmountOnBalance>
+                    </AmountContainer>
+                </div>
+            </Container>
             <ButtonContainer>
                 {text != "" ? <ActiveConfirm>CONTINUE</ActiveConfirm> : <NonActiveConfirm>CONTINUE</NonActiveConfirm>}
             </ButtonContainer>
-        </Container>
+        </>
     )
 }
