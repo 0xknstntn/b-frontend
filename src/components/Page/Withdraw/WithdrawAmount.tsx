@@ -57,7 +57,7 @@ const WithdrawNameToken = styled.a`
     font-size: 38px;
     font-weight: 500;
     margin-top: 10px;
-    margin-left: 10px;
+    margin-left: 7px;
 `
 
 const InputContainer = styled.div`
@@ -93,7 +93,7 @@ const NonActiveConfirm = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
+    font-size: 15px;
 `
 
 const ActiveConfirm = styled.button`
@@ -106,7 +106,7 @@ const ActiveConfirm = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
+    font-size: 15px;
 `
 
 
