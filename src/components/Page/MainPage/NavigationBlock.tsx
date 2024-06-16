@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import DepositMiner from '../../../assets/DepositMiner.svg'
-import BuyBattery from '../../../assets/BuyBattery.svg'
-import Withdraw from '../../../assets/Withdraw.svg'
+import DepositMiner from '../../../assets/DepositMiner.webp'
+import BuyBattery from '../../../assets/BuyBattery.webp'
+import Withdraw from '../../../assets/Withdraw.webp'
 import { Link } from "react-router-dom";
 
 const Container = styled.div`

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import BuyMoreMiners from '../../../assets/BuyMoreMiners.svg'
+import BuyMoreMiners from '../../../assets/BuyMoreMiners.webp'
 
 const MainMinerContainer = styled.div`
     width: 100%;
@@ -46,7 +46,7 @@ const AmountInfo = styled.div`
 
 const BuyMiners = styled.img`
     width: 130px;
-    height: 65px;
+    height: 60px;
 `
 
 const LineReward = styled.div`

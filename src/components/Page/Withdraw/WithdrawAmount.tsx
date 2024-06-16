@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Laptop from '../../../assets/laptop.webp'
 import BytecoinLogo from '../../../assets/BytecoinLogo.png'
-import { SetStateAction, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 const Container = styled.div`
     width: 85%;
@@ -41,8 +41,8 @@ const AmountContainer = styled.div`
 const Input = styled.input`
     max-width: 230px;
     min-width: 1ch;
-    height: 40px;
-    font-size: 50px;
+    height: 50px;
+    font-size: 55px;
     font-weight: 500;
     color: #fff;
     background: transparent;
@@ -54,7 +54,7 @@ const Input = styled.input`
 
 const WithdrawNameToken = styled.a`
     color: #a5a5a5;
-    font-size: 35px;
+    font-size: 38px;
     font-weight: 500;
     margin-top: 10px;
     margin-left: 10px;
@@ -68,7 +68,7 @@ const InputContainer = styled.div`
 
 const AmountOnBalance = styled.a`
     color: #a5a5a5;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     margin-top: 10px;
     margin-left: 2px;
@@ -80,38 +80,39 @@ const ButtonContainer = styled.div`
     display: flex;
     justify-content: center;
     position: fixed;
-    bottom: 0;
+    bottom: 20px;
 `
 
 const NonActiveConfirm = styled.button`
-    width: 100%;
+    width: 90%;
     height: 45px;
+    border-radius: 10px;
     background-color: #2f2f2f;
     color: #555;
     font-weight: 500;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 13px;
+    font-size: 14px;
 `
 
 const ActiveConfirm = styled.button`
-    width: 100%;
+    width: 90%;
     height: 45px;
+    border-radius: 10px;
     background-color: #0393ff;
     color: #fff;
     font-weight: 500;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 13px;
+    font-size: 14px;
 `
 
 
 export const WithdrawAmount = () => {
 
-    const [text, setText] = useState('');
-    
+    const [amount, setAmount] = useState('');
 
     return (
         <>
@@ -124,9 +125,9 @@ export const WithdrawAmount = () => {
                     <AmountContainer>
                         <InputContainer>
                             <Input
-                                value={text}
-                                style={{ maxWidth: `${text.length}ch` }}
-                                onChange={(e) => setText(e.target.value)}
+                                value={amount}
+                                style={{ maxWidth: `${amount.length}ch` }}
+                                onChange={(e) => setAmount(e.target.value)}
                                 inputMode='numeric'
                                 placeholder="0"></Input>
                             <WithdrawNameToken>BYTE</WithdrawNameToken>
@@ -136,7 +137,7 @@ export const WithdrawAmount = () => {
                 </div>
             </Container>
             <ButtonContainer>
-                {text != "" ? <ActiveConfirm>CONTINUE</ActiveConfirm> : <NonActiveConfirm>CONTINUE</NonActiveConfirm>}
+                {amount != "" ? <ActiveConfirm>CONTINUE</ActiveConfirm> : <NonActiveConfirm>CONTINUE</NonActiveConfirm>}
             </ButtonContainer>
         </>
     )
