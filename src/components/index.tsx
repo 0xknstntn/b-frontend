@@ -5,7 +5,10 @@ import { Routes, Route } from 'react-router-dom';
 import { DepositMiner } from "./Page/DepositMiner/DepositMiner";
 import { BuyBattery } from "./Page/BuyBattery";
 import { Withdraw } from "./Page/Withdraw";
-import { WithdrawAmount } from "./Page/Withdraw/WithdrawAmount";
+import { WithdrawAmountBYTE } from "./Page/Withdraw/WithdrawAmountBYTE";
+import { WithdrawAmountNFT } from "./Page/Withdraw/WithdrawAmountNFT";
+import { SuccessWithdrawBYTE } from "./Page/Withdraw/SuccessWithdrawBYTE";
+import { SuccessWithdrawNFT } from "./Page/Withdraw/SuccessWithdrawNFT";
 
 const Container = styled.div`
     width: 100%;
@@ -25,7 +28,10 @@ export const Index = () => {
                 <Route path="/depositminer" element={<DepositMiner />} />
                 <Route path="/buybattery" element={<BuyBattery />} />
                 <Route path="/withdraw" element={<Withdraw />} />
-                <Route path="/withdrawamount" element={<WithdrawAmount />} />
+                <Route path="/withdrawamount/BYTE" element={<WithdrawAmountBYTE />} />
+                <Route path="/withdrawamount/NFT" element={<WithdrawAmountNFT />} />
+                <Route path="/SuccessWithdrawBYTE" element={<SuccessWithdrawBYTE />} />
+                <Route path="/SuccessWithdrawNFT" element={<SuccessWithdrawNFT />} />
             </Routes>
         </Container>
     )

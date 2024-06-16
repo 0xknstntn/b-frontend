@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Laptop from '../../../assets/laptop.webp'
-import BytecoinLogo from '../../../assets/BytecoinLogo.png'
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
     width: 85%;
@@ -109,8 +109,16 @@ const ActiveConfirm = styled.button`
     font-size: 15px;
 `
 
+const Links = styled(Link)`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+`
 
-export const WithdrawAmount = () => {
+
+export const WithdrawAmountNFT = () => {
 
     const [amount, setAmount] = useState('');
 
@@ -119,7 +127,7 @@ export const WithdrawAmount = () => {
             <Container>
                 <div style={{ width: "100%" }}>
                     <NameContainer>
-                        <Logo src={BytecoinLogo} />
+                        <Logo src={Laptop} />
                         <Name>Send to Your wallet</Name>
                     </NameContainer>
                     <AmountContainer>
@@ -130,14 +138,14 @@ export const WithdrawAmount = () => {
                                 onChange={(e) => setAmount(e.target.value)}
                                 inputMode='numeric'
                                 placeholder="0"></Input>
-                            <WithdrawNameToken>BYTE</WithdrawNameToken>
+                            <WithdrawNameToken>NFT</WithdrawNameToken>
                         </InputContainer>
-                        <AmountOnBalance>0 BYTE on balance</AmountOnBalance>
+                        <AmountOnBalance>0 NFT on balance</AmountOnBalance>
                     </AmountContainer>
                 </div>
             </Container>
             <ButtonContainer>
-                {amount != "" ? <ActiveConfirm>CONTINUE</ActiveConfirm> : <NonActiveConfirm>CONTINUE</NonActiveConfirm>}
+                {amount != "" ? <Links to="/SuccessWithdrawNFT"><ActiveConfirm>CONTINUE</ActiveConfirm></Links> : <NonActiveConfirm>CONTINUE</NonActiveConfirm>}
             </ButtonContainer>
         </>
     )

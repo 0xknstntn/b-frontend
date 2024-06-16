@@ -77,7 +77,7 @@ export const Withdraw = () => {
     return (
         <Container>
             <PageName>Choose the asset to <br /> withdraw</PageName>
-            <Links to="/withdrawamount">
+            <Links to="/withdrawamount/NFT">
                 <WithdrawContainer>
                     <Logo src={Laptop} />
                     <WithdrawNameContainer>
@@ -86,7 +86,7 @@ export const Withdraw = () => {
                     </WithdrawNameContainer>
                 </WithdrawContainer>
             </Links>
-            <Links to="/withdrawamount">
+            <Links to="/withdrawamount/BYTE">
                 <WithdrawContainer>
                     <Logo src={BytecoinLogo} />
                     <WithdrawNameContainer>
