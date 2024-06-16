@@ -2,6 +2,8 @@ import styled from "styled-components";
 import BytecoinLogo from '../../../assets/BytecoinLogo.png'
 import { NavigationBlock } from "./NavigationBlock";
 import { MinerBlock } from "./MinerBlock";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Container = styled.div`
     width: 85%;
@@ -49,6 +51,12 @@ const MainInfo = styled.div`
 
 
 export const MainPage = () => {
+
+    useEffect(() => {
+		window.Telegram.WebApp.BackButton.hide()
+	}, [])
+
+
     return (
         <>
             <Container>

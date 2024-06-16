@@ -2,6 +2,8 @@ import styled from "styled-components";
 import Laptop from '../../../assets/laptop.webp'
 import BytecoinLogo from '../../../assets/BytecoinLogo.png'
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const Container = styled.div`
     width: 90%;
@@ -64,6 +66,14 @@ const Links = styled(Link)`
 
 
 export const Withdraw = () => {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+		window.Telegram.WebApp.BackButton.show()
+        window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
+	}, [])
+
     return (
         <Container>
             <PageName>Choose the asset to <br /> withdraw</PageName>
