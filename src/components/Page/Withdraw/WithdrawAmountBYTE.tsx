@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import Laptop from '../../../assets/laptop.webp'
 import BytecoinLogo from '../../../assets/BytecoinLogo.png'
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
     width: 85%;
@@ -122,6 +121,12 @@ const Links = styled(Link)`
 export const WithdrawAmountBYTE = () => {
 
     const [amount, setAmount] = useState('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+		window.Telegram.WebApp.BackButton.show()
+        window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
+	}, [])
 
     return (
         <>

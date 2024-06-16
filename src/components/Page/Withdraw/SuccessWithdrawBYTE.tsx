@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Success from '../../../assets/SuccessWithdraw.gif'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Contrainer = styled.div`
     width: 85%;
@@ -65,6 +66,14 @@ const FarmText = styled.a`
 
 
 export const SuccessWithdrawBYTE = () => {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+		window.Telegram.WebApp.BackButton.show()
+        window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
+	}, [])
+
     return(
         <Contrainer>
             <ConfirmText>Withdrawal Sent!</ConfirmText>
