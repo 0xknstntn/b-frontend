@@ -151,7 +151,7 @@ export const DepositMiner = () => {
                 </div>
             </Container>
             <ButtonContainer>
-                {amount != "" ? <ActiveConfirm>CONTINUE</ActiveConfirm> : <NonActiveConfirm>CONTINUE</NonActiveConfirm>}
+                {amount != "" ? <Links to="/SuccessDeposit"><ActiveConfirm>CONTINUE</ActiveConfirm></Links> : <NonActiveConfirm>CONTINUE</NonActiveConfirm>}
             </ButtonContainer>
         </>
     )

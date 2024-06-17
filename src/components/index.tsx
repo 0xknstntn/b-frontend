@@ -9,6 +9,7 @@ import { WithdrawAmountBYTE } from "./Page/Withdraw/WithdrawAmountBYTE";
 import { WithdrawAmountNFT } from "./Page/Withdraw/WithdrawAmountNFT";
 import { SuccessWithdrawBYTE } from "./Page/Withdraw/SuccessWithdrawBYTE";
 import { SuccessWithdrawNFT } from "./Page/Withdraw/SuccessWithdrawNFT";
+import { SuccessDeposit } from "./Page/DepositMiner/SuccessDeposit";
 
 const Container = styled.div`
     width: 100%;
@@ -32,6 +33,7 @@ export const Index = () => {
                 <Route path="/withdrawamount/NFT" element={<WithdrawAmountNFT />} />
                 <Route path="/SuccessWithdrawBYTE" element={<SuccessWithdrawBYTE />} />
                 <Route path="/SuccessWithdrawNFT" element={<SuccessWithdrawNFT />} />
+                <Route path="/SuccessDeposit" element={<SuccessDeposit />} />
             </Routes>
         </Container>
     )
