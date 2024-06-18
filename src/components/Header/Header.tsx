@@ -18,9 +18,10 @@ const UserLogo = styled.img`
 
 
 export const Header = () => {
+    const logo = window.Telegram.WebApp.initDataUnsafe.user?.photo_url
     return(
         <HeaderBlock>
-            <UserLogo src={Logo}/>
+            <UserLogo src={logo}/>
             <TonConnectButton />
         </HeaderBlock>
     )
