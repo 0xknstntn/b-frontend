@@ -62,8 +62,8 @@ export const MainPage = () => {
             <Container>
                 <MainInfo>
                     <MainInfoBlock>
-                        <MainText>Bytecoin</MainText>
-                        <Amount>0 BYTE</Amount>
+                        <MainText>{window.Telegram.WebApp.initDataUnsafe.user?.username}</MainText>
+                        <Amount>0 {window.Telegram.WebApp.initDataUnsafe.user?.photo_url}</Amount>
                         <AmountDescription>0 Mined today • 2 NFT ASIC</AmountDescription>
                     </MainInfoBlock>
                     <Logo src={BytecoinLogo} />
