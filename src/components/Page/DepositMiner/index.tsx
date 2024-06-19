@@ -15,7 +15,7 @@ const NameContainer = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 30px;
 `
 
 const Logo = styled.img`
@@ -140,7 +140,8 @@ export const DepositMiner = () => {
                                 value={amount}
                                 style={{ width: `${amount.length}ch` }}
                                 onChange={(e) => setAmount(e.target.value)}
-                                inputMode='numeric'
+                                type="text"
+                                inputMode='numeric' pattern="\d*"
                                 placeholder="0"></Input>
                             <WithdrawNameToken>NFT</WithdrawNameToken>
                         </InputContainer>

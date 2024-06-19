@@ -15,7 +15,7 @@ const NameContainer = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 30px;
 `
 
 const Logo = styled.img`
@@ -38,17 +38,14 @@ const AmountContainer = styled.div`
 `
 
 const Input = styled.input`
-    max-width: 230px;
+    width: 230px;
     min-width: 1ch;
-    height: 50px;
+    height: 60px;
     font-size: 55px;
     font-weight: 500;
     color: #fff;
     background: transparent;
     padding: 0;
-    ::placeholder { 
-    color: #fff;
-}
 `
 
 const WithdrawNameToken = styled.a`
@@ -56,7 +53,7 @@ const WithdrawNameToken = styled.a`
     font-size: 30px;
     font-weight: 500;
     margin-top: 10px;
-    margin-left: 7px;
+    margin-left: 5px;
 `
 
 const InputContainer = styled.div`

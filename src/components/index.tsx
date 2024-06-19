@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Header } from "./Header/Header";
 import { MainPage } from "./Page/MainPage";
 import { Routes, Route } from 'react-router-dom';
-import { DepositMiner } from "./Page/DepositMiner/DepositMiner";
+import { DepositMiner } from "./Page/DepositMiner";
 import { BuyBattery } from "./Page/BuyBattery";
 import { Withdraw } from "./Page/Withdraw";
 import { WithdrawAmountBYTE } from "./Page/Withdraw/WithdrawAmountBYTE";

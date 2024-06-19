@@ -17,7 +17,7 @@ const PageName = styled.a`
     color: #fff;
     font-size: 25px;
     font-weight: 500;
-    margin-top: 60px;
+    margin-top: 30px;
     text-align: center;
 `
 
