@@ -41,7 +41,7 @@ const AmountContainer = styled.div`
 const Input = styled.input`
     max-width: 230px;
     min-width: 1ch;
-    height: 50px;
+    height: 60px;
     font-size: 55px;
     font-weight: 500;
     color: #fff;
@@ -97,17 +97,18 @@ const NonActiveConfirm = styled.button`
 `
 
 const ActiveConfirm = styled.button`
-    width: 90%;
+    width: 85%;
     height: 45px;
     border-radius: 10px;
-    background-color: #3e87f6;
+    background-color: #0098EA;
     color: #fff;
-    font-weight: 500;
+    font-weight: 400;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 15px;
 `
+
 
 const Links = styled(Link)`
     width: 100%;

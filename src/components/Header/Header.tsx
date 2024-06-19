@@ -46,6 +46,7 @@ export const Header = () => {
         }
         main()
     }, [])
+
     return(
         <HeaderBlock>
             <UserLogo src={logo}/>

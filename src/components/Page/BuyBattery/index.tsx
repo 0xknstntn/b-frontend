@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import NFTASIC from '../../../assets/laptop.webp'
+import TonLogo from '../../../assets/TonLogo.svg'
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -100,7 +100,7 @@ const ActiveConfirm = styled.button`
     width: 85%;
     height: 45px;
     border-radius: 10px;
-    background-color: #3e87f6;
+    background-color: #0098EA;
     color: #fff;
     font-weight: 400;
     display: flex;
@@ -114,6 +114,13 @@ const Description = styled.a`
     font-size: 13px;
     font-weight: 500;
     text-align: left;
+`
+
+
+const LogoInButton = styled.img`
+    width: 26px;
+    height: 26px;
+    margin-top: -2px;
 `
 
 const Links = styled(Link)`
@@ -164,7 +171,7 @@ export const BuyBattery = () => {
                 </Description>
             </div>
             <ButtonContainer>
-                {amount != "" ? <ActiveConfirm>Buy for 0.0125</ActiveConfirm> : <NonActiveConfirm>Buy for 0.0125</NonActiveConfirm>}
+                {amount != "" ? <ActiveConfirm>Buy for 0.0125 <LogoInButton src={TonLogo}/></ActiveConfirm> : <NonActiveConfirm>Buy for 0.0125</NonActiveConfirm>}
             </ButtonContainer>
         </>
     )

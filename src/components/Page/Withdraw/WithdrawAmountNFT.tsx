@@ -97,12 +97,12 @@ const NonActiveConfirm = styled.button`
 `
 
 const ActiveConfirm = styled.button`
-    width: 90%;
+    width: 85%;
     height: 45px;
     border-radius: 10px;
-    background-color: #0393ff;
+    background-color: #0098EA;
     color: #fff;
-    font-weight: 500;
+    font-weight: 400;
     display: flex;
     justify-content: center;
     align-items: center;
