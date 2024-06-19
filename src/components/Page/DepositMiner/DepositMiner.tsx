@@ -43,10 +43,11 @@ const Input = styled.input`
     min-width: 1ch;
     height: 60px;
     font-size: 55px;
-    font-weight: 500;
+    font-weight: 600;
     color: #fff;
     background: transparent;
     padding: 0;
+    font-family: Roboto;
     ::placeholder { 
     color: #fff;
 }
@@ -125,9 +126,9 @@ export const DepositMiner = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-		window.Telegram.WebApp.BackButton.show()
+        window.Telegram.WebApp.BackButton.show()
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
-	}, [])
+    }, [])
 
     return (
         <>
