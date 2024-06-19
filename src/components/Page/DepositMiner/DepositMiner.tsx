@@ -39,7 +39,7 @@ const AmountContainer = styled.div`
 `
 
 const Input = styled.input`
-    max-width: 230px;
+    width: 230px;
     min-width: 1ch;
     height: 60px;
     font-size: 55px;
@@ -47,9 +47,6 @@ const Input = styled.input`
     color: #fff;
     background: transparent;
     padding: 0;
-    ::placeholder { 
-    color: #fff;
-}
 `
 
 const WithdrawNameToken = styled.a`
@@ -141,7 +138,7 @@ export const DepositMiner = () => {
                         <InputContainer>
                             <Input
                                 value={amount}
-                                style={{ maxWidth: `${amount.length}ch` }}
+                                style={{ width: `${amount.length}ch` }}
                                 onChange={(e) => setAmount(e.target.value)}
                                 inputMode='numeric'
                                 placeholder="0"></Input>
