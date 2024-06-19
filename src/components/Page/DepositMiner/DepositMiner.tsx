@@ -54,7 +54,7 @@ const WithdrawNameToken = styled.a`
     font-size: 38px;
     font-weight: 500;
     margin-top: 10px;
-    margin-left: 7px;
+    margin-left: 5px;
 `
 
 const InputContainer = styled.div`
