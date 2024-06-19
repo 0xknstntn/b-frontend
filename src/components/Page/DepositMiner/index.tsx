@@ -141,7 +141,7 @@ export const DepositMiner = () => {
                                 style={{ width: `${amount.length}ch` }}
                                 onChange={(e) => setAmount(e.target.value)}
                                 type="text"
-                                inputMode='numeric' pattern="\d*"
+                                inputMode="decimal" pattern="\d*"
                                 placeholder="0"></Input>
                             <WithdrawNameToken>NFT</WithdrawNameToken>
                         </InputContainer>
