@@ -28,7 +28,7 @@ const ReturnButton = styled.button`
     width: 90%;
     height: 45px;
     border-radius: 10px;
-    background-color: #3e87f6;
+    background-color: #0098EA;
     color: #fff;
     font-weight: 500;
     display: flex;
@@ -47,25 +47,8 @@ const Links = styled(Link)`
     bottom: 50px;
 `
 
-const FarmContainer = styled.div`
-    width: 70%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid #3e87f6;
-    padding-bottom: 5px;
-`
 
-const FarmText = styled.a`
-    font-size: 15px;
-    font-weight: 500;
-    color: #fff;
-    text-align: center;
-    margin-top: 50px;
-`
-
-
-export const SuccessWithdrawBYTE = () => {
+export const SuccessBuying = () => {
 
     const navigate = useNavigate();
 
@@ -76,11 +59,8 @@ export const SuccessWithdrawBYTE = () => {
 
     return(
         <Contrainer>
-            <ConfirmText>Withdrawal Sent!</ConfirmText>
+            <ConfirmText>Buying Sent!</ConfirmText>
             <SuccessGIF src={Success}/>
-            <FarmContainer>
-                <FarmText>Farm on DeDust.io with 🔥 APR</FarmText>
-            </FarmContainer>
             <Links to="/">
                 <ReturnButton>Return to menu</ReturnButton>
             </Links>

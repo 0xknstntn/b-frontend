@@ -7,9 +7,10 @@ import { BuyBattery } from "./Page/BuyBattery";
 import { Withdraw } from "./Page/Withdraw";
 import { WithdrawAmountBYTE } from "./Page/Withdraw/WithdrawAmountBYTE";
 import { WithdrawAmountNFT } from "./Page/Withdraw/WithdrawAmountNFT";
-import { SuccessWithdrawBYTE } from "./Page/Withdraw/SuccessWithdrawBYTE";
-import { SuccessWithdrawNFT } from "./Page/Withdraw/SuccessWithdrawNFT";
-import { SuccessDeposit } from "./Page/DepositMiner/SuccessDeposit";
+import { SuccessWithdrawBYTE } from "./Page/Withdraw/SuccessfulWithdrawBYTE";
+import { SuccessWithdrawNFT } from "./Page/Withdraw/SuccessfulWithdrawNFT";
+import { SuccessDeposit } from "./Page/DepositMiner/SuccessfulDeposit";
+import { SuccessBuying } from "./Page/BuyBattery/SuccessfulBuy";
 
 const Container = styled.div`
     width: 100%;
@@ -34,6 +35,7 @@ export const Index = () => {
                 <Route path="/SuccessWithdrawBYTE" element={<SuccessWithdrawBYTE />} />
                 <Route path="/SuccessWithdrawNFT" element={<SuccessWithdrawNFT />} />
                 <Route path="/SuccessDeposit" element={<SuccessDeposit />} />
+                <Route path="/SuccessBuying" element={<SuccessBuying />} />
             </Routes>
         </Container>
     )

@@ -81,7 +81,7 @@ const ButtonContainer = styled.div`
 `
 
 const NonActiveConfirm = styled.button`
-    width: 85%;
+    width: 90%;
     height: 45px;
     border-radius: 10px;
     background-color: #2f2f2f;
@@ -94,7 +94,7 @@ const NonActiveConfirm = styled.button`
 `
 
 const ActiveConfirm = styled.button`
-    width: 85%;
+    width: 90%;
     height: 45px;
     border-radius: 10px;
     background-color: #0098EA;
@@ -168,7 +168,7 @@ export const BuyBattery = () => {
                 </Description>
             </div>
             <ButtonContainer>
-                {amount != "" ? <ActiveConfirm>Buy for 0.0125 <LogoInButton src={TonLogo}/></ActiveConfirm> : <NonActiveConfirm>Buy for 0.0125</NonActiveConfirm>}
+                {amount != "" ? <Links to="/SuccessBuying"><ActiveConfirm>Buy for 0.0125 <LogoInButton src={TonLogo}/></ActiveConfirm></Links> : <NonActiveConfirm>Buy for 0.0125</NonActiveConfirm>}
             </ButtonContainer>
         </>
     )
