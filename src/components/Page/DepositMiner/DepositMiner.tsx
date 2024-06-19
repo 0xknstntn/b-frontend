@@ -47,7 +47,6 @@ const Input = styled.input`
     color: #fff;
     background: transparent;
     padding: 0;
-    font-family: Roboto;
     ::placeholder { 
     color: #fff;
 }
@@ -98,7 +97,7 @@ const NonActiveConfirm = styled.button`
 `
 
 const ActiveConfirm = styled.button`
-    width: 85%;
+    width: 90%;
     height: 45px;
     border-radius: 10px;
     background-color: #0098EA;
