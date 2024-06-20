@@ -156,7 +156,7 @@ export const BuyBattery = () => {
                                 placeholder="0"></Input>
                             <WithdrawNameToken>batteries</WithdrawNameToken>
                         </InputContainer>
-                        <AmountOnBalance>1 Battery = 0.0125 TON</AmountOnBalance>
+                        <AmountOnBalance>1 Battery = 2 TON</AmountOnBalance>
                     </AmountContainer>
                 </div>
             </Container>
