@@ -73,12 +73,12 @@ export const MinerBlock = () => {
                     <AmountInfo>
                         <GreyText>My Miners</GreyText>
                         <AmountASIC>2 ASIC</AmountASIC>
-                        <GreyText>3.222 BYTE per 10 min</GreyText>
+                        <GreyText>3.222 BYTE per 1 day</GreyText>
                     </AmountInfo>
                     <BuyMiners src={BuyMoreMiners}/>
                 </ASICContainer>
                 <LineReward />
-                <RewardTime>2016 Batteries on balance (2 weeks)</RewardTime>
+                <RewardTime>1 Batteries on balance (1 day)</RewardTime>
             </MyMinerContainer>
         </MainMinerContainer>
     )
