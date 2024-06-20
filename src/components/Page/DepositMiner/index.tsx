@@ -38,15 +38,19 @@ const AmountContainer = styled.div`
     margin-top: 20px;
 `
 
-const Input = styled.input`
+const Input = styled.textarea`
     width: 230px;
     min-width: 1ch;
     height: 60px;
     font-size: 55px;
-    font-weight: 400;
+    font-weight: 500;
     color: #fff;
     background: transparent;
     padding: 0;
+    border: none;
+    outline: none;
+    overflow: hidden;
+    resize: none;
 `
 
 const WithdrawNameToken = styled.a`
@@ -54,6 +58,7 @@ const WithdrawNameToken = styled.a`
     font-size: 38px;
     font-weight: 500;
     margin-top: 10px;
+    margin-left: 5px;
 `
 
 const InputContainer = styled.div`
@@ -139,8 +144,7 @@ export const DepositMiner = () => {
                                 value={amount}
                                 style={{ width: `${amount.length}ch` }}
                                 onChange={(e) => setAmount(e.target.value)}
-                                type="text"
-                                inputMode="decimal" pattern="\d*"
+                                inputMode="decimal"
                                 placeholder="0"></Input>
                             <WithdrawNameToken>NFT</WithdrawNameToken>
                         </InputContainer>

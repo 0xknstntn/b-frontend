@@ -42,7 +42,7 @@ const Input = styled.input`
     min-width: 1ch;
     height: 60px;
     font-size: 55px;
-    font-weight: 400;
+    font-weight: 500;
     color: #fff;
     background: transparent;
     padding: 0;
@@ -53,6 +53,7 @@ const WithdrawNameToken = styled.a`
     font-size: 30px;
     font-weight: 500;
     margin-top: 10px;
+    margin-left: 5px;
 `
 
 const InputContainer = styled.div`
