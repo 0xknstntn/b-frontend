@@ -42,7 +42,7 @@ const Input = styled.input`
     min-width: 1ch;
     height: 60px;
     font-size: 55px;
-    font-weight: 500;
+    font-weight: 400;
     color: #fff;
     background: transparent;
     padding: 0;
