@@ -53,7 +53,7 @@ const WithdrawNameToken = styled.a`
     color: #a5a5a5;
     font-size: 38px;
     font-weight: 500;
-    margin-top: 10px;
+    margin-top: 7.5px;
     margin-left: 5px;
 `
 
