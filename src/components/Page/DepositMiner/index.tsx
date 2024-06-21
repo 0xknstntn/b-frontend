@@ -47,7 +47,6 @@ const Input = styled.input`
     color: #fff;
     background: transparent;
     padding: 0;
-    letter-spacing: 3px;
 `
 
 //letter-spacing
@@ -143,7 +142,7 @@ export const DepositMiner = () => {
                                 value={amount}
                                 style={{ width: `${amount.length}ch` }}
                                 onChange={(e) => setAmount(e.target.value)}
-                                inputMode="decimal" type="text" size={4}
+                                inputMode="numeric" type="text"
                                 placeholder="0"></Input>
                             <WithdrawNameToken>NFT</WithdrawNameToken>
                         </InputContainer>

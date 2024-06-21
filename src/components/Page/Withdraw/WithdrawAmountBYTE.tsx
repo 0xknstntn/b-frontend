@@ -139,7 +139,7 @@ export const WithdrawAmountBYTE = () => {
                                 value={amount}
                                 style={{ maxWidth: `${amount.length}ch` }}
                                 onChange={(e) => setAmount(e.target.value)}
-                                inputMode='numeric'
+                                inputMode='decimal'
                                 placeholder="0"></Input>
                             <WithdrawNameToken>BYTE</WithdrawNameToken>
                         </InputContainer>
