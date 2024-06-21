@@ -4,6 +4,7 @@ import { NavigationBlock } from "./NavigationBlock";
 import { MinerBlock } from "./MinerBlock";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useMinersInfo, useProtocolInfo } from "../../../store/useProtocol";
 
 const Container = styled.div`
     width: 85%;
@@ -56,6 +57,8 @@ export const MainPage = () => {
 		window.Telegram.WebApp.BackButton.hide()
 	}, [])
 
+    const [ miner_info, setMinerInfo ] = useMinersInfo();
+    const [ protocol_info, setProtocolInfo ] = useProtocolInfo();
 
     return (
         <>
@@ -63,8 +66,8 @@ export const MainPage = () => {
                 <MainInfo>
                     <MainInfoBlock>
                         <MainText>Bytecoin</MainText>
-                        <Amount>0 BYTE</Amount>
-                        <AmountDescription>0 Mined today • 2 NFT ASIC</AmountDescription>
+                        <Amount>{miner_info.bytecoins_amount} BYTE</Amount>
+                        <AmountDescription>{((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount } Mined today • {miner_info.miners_amount} NFT ASIC</AmountDescription>
                     </MainInfoBlock>
                     <Logo src={BytecoinLogo} />
                 </MainInfo>

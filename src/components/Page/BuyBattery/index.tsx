@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import TonLogo from '../../../assets/TonLogo.svg'
-import { useState, useEffect } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useMinersInfo } from "../../../store/useProtocol";
 
 const Container = styled.div`
     width: 85%;
@@ -50,6 +51,13 @@ const Input = styled.input`
 
 const WithdrawNameToken = styled.a`
     color: #a5a5a5;
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: 7.5px;
+    margin-left: 5px;
+`
+const WithdrawNameTokenMany = styled.a`
+    color: #ef5b5b;
     font-size: 30px;
     font-weight: 500;
     margin-top: 7.5px;
@@ -132,12 +140,17 @@ const Links = styled(Link)`
 export const BuyBattery = () => {
 
     const [amount, setAmount] = useState('');
+    const [ miner_info, setMinerInfo ] = useMinersInfo();
     const navigate = useNavigate();
 
     useEffect(() => {
         window.Telegram.WebApp.BackButton.show()
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
     }, [])
+
+    const HandleInputAmpunt = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setAmount(e.target.value)
+    };
 
     return (
         <>
@@ -148,15 +161,15 @@ export const BuyBattery = () => {
                     </NameContainer>
                     <AmountContainer>
                         <InputContainer>
-                            <Input
-                                value={amount}
-                                style={{ maxWidth: `${amount.length}ch` }}
-                                onChange={(e) => setAmount(e.target.value)}
-                                inputMode='numeric'
-                                placeholder="0"></Input>
-                            <WithdrawNameToken>batteries</WithdrawNameToken>
+                            { (Number(amount) * 2 > (miner_info.balance / 10**9)) || miner_info.miners_amount == 0 ? <> 
+                                <Input value={amount} style={{ maxWidth: `${amount.length}ch`, color: "#ef5b5b" }} onChange={HandleInputAmpunt} inputMode='numeric' placeholder="0"></Input> 
+                                <WithdrawNameTokenMany>batteries</WithdrawNameTokenMany> </> 
+                            : 
+                                <> <Input value={amount} style={{ maxWidth: `${amount.length}ch` }} onChange={HandleInputAmpunt} inputMode='numeric' placeholder="0"></Input> 
+                                <WithdrawNameToken>batteries</WithdrawNameToken> </> 
+                            }
                         </InputContainer>
-                        <AmountOnBalance>1 Battery = 2 TON</AmountOnBalance>
+                        <AmountOnBalance>1 Battery ≈ 2 TON</AmountOnBalance>
                     </AmountContainer>
                 </div>
             </Container>
@@ -168,7 +181,13 @@ export const BuyBattery = () => {
                 </Description>
             </div>
             <ButtonContainer>
-                {amount != "" ? <Links to="/SuccessBuying"><ActiveConfirm>Buy for 0.0125 <LogoInButton src={TonLogo}/></ActiveConfirm></Links> : <NonActiveConfirm>Buy for 0.0125</NonActiveConfirm>}
+                {
+                    Number(amount) != 0 ? 
+                        (Number(amount) * 2 < (miner_info.balance / 10**9)) ?
+                            <Links to="/SuccessBuying"><ActiveConfirm>Buy for {Number(amount) * 2} <LogoInButton src={TonLogo}/></ActiveConfirm></Links> 
+                        : <NonActiveConfirm>Not enough funds</NonActiveConfirm>
+                    : 
+                        <NonActiveConfirm>Enter the number of batteries</NonActiveConfirm>}
             </ButtonContainer>
         </>
     )
