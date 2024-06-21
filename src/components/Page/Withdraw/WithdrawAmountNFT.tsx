@@ -139,7 +139,7 @@ export const WithdrawAmountNFT = () => {
                                 value={amount}
                                 style={{ maxWidth: `${amount.length}ch` }}
                                 onChange={(e) => setAmount(e.target.value)}
-                                inputMode='numeric'
+                                inputMode='numeric' pattern="[0-9]*"
                                 placeholder="0"></Input>
                             <WithdrawNameToken>NFT</WithdrawNameToken>
                         </InputContainer>
