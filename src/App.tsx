@@ -22,10 +22,10 @@ function App() {
 			let result_json = await result.json()
 			setMinerInfo({
 				miner_address: userFriendlyAddress,
-				miners_amount: result_json.result.miners_amount,
-				battery_amount: result_json.result.battery_amount,
-				bytecoins_amount: result_json.result.bytecoins_amount,
-				balance: result_json.result.balance,
+				miners_amount: result_json.result.miners_amount === undefined ? 0 : result_json.result.miners_amount,
+				battery_amount: result_json.result.battery_amount === undefined ? 0 : result_json.result.battery_amount,
+				bytecoins_amount: result_json.result.bytecoins_amount === undefined ? 0 : result_json.result.bytecoins_amount,
+				balance: result_json.result.balance === undefined ? 0 : result_json.result.balance,
 			})
 
 			let result_miners_nft_count = await fetch(api_url + `/protocol/miners_nft_count`)
