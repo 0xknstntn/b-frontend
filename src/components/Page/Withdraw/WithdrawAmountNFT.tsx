@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Laptop from '../../../assets/laptop.webp'
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useMinersInfo } from "../../../store/useProtocol";
 
 const Container = styled.div`
     width: 85%;
@@ -117,8 +118,9 @@ const Links = styled(Link)`
 
 export const WithdrawAmountNFT = () => {
 
-    const [amount, setAmount] = useState('');
+    const [ amount, setAmount ] = useState('');
     const navigate = useNavigate();
+    const [ miner_info, setMinerInfo ] = useMinersInfo();
 
     useEffect(() => {
 		window.Telegram.WebApp.BackButton.show()
@@ -143,7 +145,7 @@ export const WithdrawAmountNFT = () => {
                                 placeholder="0"></Input>
                             <WithdrawNameToken>NFT</WithdrawNameToken>
                         </InputContainer>
-                        <AmountOnBalance>0 NFT on balance</AmountOnBalance>
+                        <AmountOnBalance>{miner_info.miners_amount} NFT on balance</AmountOnBalance>
                     </AmountContainer>
                 </div>
             </Container>

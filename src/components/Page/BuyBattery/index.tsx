@@ -152,6 +152,8 @@ export const BuyBattery = () => {
         setAmount(e.target.value)
     };
 
+    console.log(miner_info)
+
     return (
         <>
             <Container>
@@ -161,10 +163,11 @@ export const BuyBattery = () => {
                     </NameContainer>
                     <AmountContainer>
                         <InputContainer>
-                            { (Number(amount) * 2 > (miner_info.balance / 10**9)) || miner_info.miners_amount == 0 ? <> 
-                                <Input value={amount} style={{ maxWidth: `${amount.length}ch`, color: "#ef5b5b" }} onChange={HandleInputAmpunt} inputMode='numeric' placeholder="0"></Input> 
+                            { ((Number(amount) * 2 > (miner_info.balance / 10**9)) || ( miner_info.miners_amount == 0 )) && (Number(amount) != 0) ? 
+                                <> <Input value={amount} style={{ maxWidth: `${amount.length}ch`, color: "#ef5b5b" }} onChange={HandleInputAmpunt} inputMode='numeric' placeholder="0"></Input> 
                                 <WithdrawNameTokenMany>batteries</WithdrawNameTokenMany> </> 
                             : 
+                                
                                 <> <Input value={amount} style={{ maxWidth: `${amount.length}ch` }} onChange={HandleInputAmpunt} inputMode='numeric' placeholder="0"></Input> 
                                 <WithdrawNameToken>batteries</WithdrawNameToken> </> 
                             }

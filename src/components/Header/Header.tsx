@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Logo from '../../assets/UserLogoExmp.jpg'
 import { TonConnectButton } from "@tonconnect/ui-react";
 import { useEffect, useState } from "react";
 import Skeleton from '@mui/material/Skeleton';
@@ -20,8 +19,6 @@ const UserLogo = styled.img`
 
 
 export const Header = () => {
-    //const logo = window.Telegram.WebApp.initDataUnsafe.user?.id
-
     const [logo, setLogo] = useState("")
 
     useEffect(() => {

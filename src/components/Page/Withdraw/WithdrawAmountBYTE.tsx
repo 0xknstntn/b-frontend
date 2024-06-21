@@ -2,6 +2,7 @@ import styled from "styled-components";
 import BytecoinLogo from '../../../assets/BytecoinLogo.png'
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useMinersInfo } from "../../../store/useProtocol";
 
 const Container = styled.div`
     width: 85%;
@@ -119,6 +120,7 @@ export const WithdrawAmountBYTE = () => {
 
     const [amount, setAmount] = useState('');
     const navigate = useNavigate();
+    const [ miner_info, setMinerInfo ] = useMinersInfo();
 
     useEffect(() => {
 		window.Telegram.WebApp.BackButton.show()
@@ -143,7 +145,7 @@ export const WithdrawAmountBYTE = () => {
                                 placeholder="0"></Input>
                             <WithdrawNameToken>BYTE</WithdrawNameToken>
                         </InputContainer>
-                        <AmountOnBalance>0 BYTE on balance</AmountOnBalance>
+                        <AmountOnBalance>{miner_info.bytecoins_amount} BYTE on balance</AmountOnBalance>
                     </AmountContainer>
                 </div>
             </Container>
