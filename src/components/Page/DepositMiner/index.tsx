@@ -2,6 +2,7 @@ import styled from "styled-components";
 import NFTASIC from '../../../assets/laptop.webp'
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useMinersInfo } from "../../../store/useProtocol";
 
 const Container = styled.div`
     width: 85%;
@@ -55,7 +56,15 @@ const WithdrawNameToken = styled.a`
     color: #a5a5a5;
     font-size: 38px;
     font-weight: 500;
-    margin-top: 7.5px;
+    margin-top: 7px;
+    margin-left: 5px;
+`
+
+const WithdrawNameTokenError = styled.a`
+    color: #ef5b5b;
+    font-size: 38px;
+    font-weight: 500;
+    margin-top: 7px;
     margin-left: 5px;
 `
 
@@ -122,6 +131,7 @@ export const DepositMiner = () => {
 
     const [amount, setAmount] = useState('');
     const navigate = useNavigate();
+    const [ miner_info, setMinerInfo ] = useMinersInfo();
 
     useEffect(() => {
         window.Telegram.WebApp.BackButton.show()
@@ -138,20 +148,43 @@ export const DepositMiner = () => {
                     </NameContainer>
                     <AmountContainer>
                         <InputContainer>
-                            <Input
-                                value={amount}
-                                style={{ width: `${amount.length}ch` }}
-                                onChange={(e) => setAmount(e.target.value)}
-                                inputMode="numeric" pattern="[0-9]*"
-                                placeholder="0"></Input>
-                            <WithdrawNameToken>NFT</WithdrawNameToken>
+
+                            { Number(amount) > miner_info.nfts.length ? 
+                                <> 
+                                <Input
+                                    value={amount}
+                                    style={{ width: `${amount.length}ch`, color: "#ef5b5b" }}
+                                    onChange={(e) => setAmount(e.target.value)}
+                                    inputMode="numeric" pattern="[0-9]*"
+                                    placeholder="0"></Input>
+                                <WithdrawNameTokenError>NFT</WithdrawNameTokenError>
+                                </> 
+                            : 
+                                <> 
+                                <Input
+                                    value={amount}
+                                    style={{ width: `${amount.length}ch` }}
+                                    onChange={(e) => setAmount(e.target.value)}
+                                    inputMode="numeric" pattern="[0-9]*"
+                                    placeholder="0"></Input>
+                                <WithdrawNameToken>NFT</WithdrawNameToken>
+                                </> 
+                            }
                         </InputContainer>
-                        <AmountOnBalance>0 NFT on balance</AmountOnBalance>
+                        <AmountOnBalance>{miner_info.nfts.length} NFT on balance</AmountOnBalance>
                     </AmountContainer>
                 </div>
             </Container>
             <ButtonContainer>
-                {amount != "" ? <Links to="/SuccessDeposit"><ActiveConfirm>CONTINUE</ActiveConfirm></Links> : <NonActiveConfirm>CONTINUE</NonActiveConfirm>}
+                {
+                    (amount != "" && Number(amount) != 0) ? 
+                        Number(amount) <= miner_info.nfts.length ?
+                            <Links to="/SuccessDeposit"> <ActiveConfirm>CONTINUE</ActiveConfirm> </Links> 
+                        : 
+                            <NonActiveConfirm>Not enough funds</NonActiveConfirm>
+                    : 
+                        <NonActiveConfirm>CONTINUE</NonActiveConfirm>
+                }
             </ButtonContainer>
         </>
     )

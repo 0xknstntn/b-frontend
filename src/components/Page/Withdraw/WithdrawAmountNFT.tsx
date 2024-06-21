@@ -54,9 +54,18 @@ const WithdrawNameToken = styled.a`
     color: #a5a5a5;
     font-size: 38px;
     font-weight: 500;
-    margin-top: 7.5px;
+    margin-top: 7px;
     margin-left: 5px;
 `
+
+const WithdrawNameTokenError = styled.a`
+    color: #ef5b5b;
+    font-size: 38px;
+    font-weight: 500;
+    margin-top: 7px;
+    margin-left: 5px;
+`
+
 
 const InputContainer = styled.div`
     display: flex;
@@ -137,20 +146,32 @@ export const WithdrawAmountNFT = () => {
                     </NameContainer>
                     <AmountContainer>
                         <InputContainer>
-                            <Input
-                                value={amount}
-                                style={{ maxWidth: `${amount.length}ch` }}
-                                onChange={(e) => setAmount(e.target.value)}
-                                inputMode='numeric' pattern="[0-9]*"
-                                placeholder="0"></Input>
-                            <WithdrawNameToken>NFT</WithdrawNameToken>
+                            { Number(amount) > miner_info.miners_amount ?
+                                <> 
+                                    <Input value={amount} style={{ maxWidth: `${amount.length}ch`, color: "#ef5b5b" }} onChange={(e) => setAmount(e.target.value)} inputMode='numeric' pattern="[0-9]*" placeholder="0"></Input>
+                                    <WithdrawNameTokenError>NFT</WithdrawNameTokenError> 
+                                </>
+                            : 
+                                <> 
+                                    <Input value={amount} style={{ maxWidth: `${amount.length}ch` }} onChange={(e) => setAmount(e.target.value)} inputMode='numeric' pattern="[0-9]*" placeholder="0"></Input>
+                                    <WithdrawNameToken>NFT</WithdrawNameToken> 
+                                </>
+                        }
                         </InputContainer>
                         <AmountOnBalance>{miner_info.miners_amount} NFT on balance</AmountOnBalance>
                     </AmountContainer>
                 </div>
             </Container>
             <ButtonContainer>
-                {amount != "" ? <Links to="/SuccessWithdrawNFT"><ActiveConfirm>CONTINUE</ActiveConfirm></Links> : <NonActiveConfirm>CONTINUE</NonActiveConfirm>}
+                { 
+                    (amount != "" && Number(amount) != 0 ) ?
+                        Number(amount) <= miner_info.miners_amount ?
+                            <Links to="/SuccessWithdrawNFT"><ActiveConfirm>CONTINUE</ActiveConfirm></Links> 
+                        : 
+                            <NonActiveConfirm>Not enough funds</NonActiveConfirm>
+                    : 
+                        <NonActiveConfirm>CONTINUE</NonActiveConfirm>
+                }
             </ButtonContainer>
         </>
     )

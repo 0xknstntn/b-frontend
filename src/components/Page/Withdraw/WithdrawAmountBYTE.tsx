@@ -54,7 +54,15 @@ const WithdrawNameToken = styled.a`
     color: #a5a5a5;
     font-size: 38px;
     font-weight: 500;
-    margin-top: 7.5px;
+    margin-top: 7px;
+    margin-left: 5px;
+`
+
+const WithdrawNameTokenError = styled.a`
+    color: #ef5b5b;
+    font-size: 38px;
+    font-weight: 500;
+    margin-top: 7px;
     margin-left: 5px;
 `
 
@@ -137,20 +145,28 @@ export const WithdrawAmountBYTE = () => {
                     </NameContainer>
                     <AmountContainer>
                         <InputContainer>
-                            <Input
-                                value={amount}
-                                style={{ maxWidth: `${amount.length}ch` }}
-                                onChange={(e) => setAmount(e.target.value)}
-                                inputMode='decimal'
-                                placeholder="0"></Input>
-                            <WithdrawNameToken>BYTE</WithdrawNameToken>
+                            {   Number(amount) > miner_info.bytecoins_amount
+                                ? 
+                                <> <Input value={amount} style={{ maxWidth: `${amount.length}ch`, color: "#ef5b5b" }} onChange={(e) => setAmount(e.target.value)} inputMode='decimal' placeholder="0"></Input>
+                                <WithdrawNameTokenError>BYTE</WithdrawNameTokenError> </>
+                                : 
+                                <> <Input value={amount} style={{ maxWidth: `${amount.length}ch` }} onChange={(e) => setAmount(e.target.value)} inputMode='decimal' placeholder="0"></Input>
+                                <WithdrawNameToken>BYTE</WithdrawNameToken> </>
+                            }
                         </InputContainer>
                         <AmountOnBalance>{miner_info.bytecoins_amount} BYTE on balance</AmountOnBalance>
                     </AmountContainer>
                 </div>
             </Container>
             <ButtonContainer>
-                {amount != "" ? <Links to="/SuccessWithdrawBYTE"><ActiveConfirm>CONTINUE</ActiveConfirm></Links> : <NonActiveConfirm>CONTINUE</NonActiveConfirm>}
+                {
+                    (amount != "" && Number(amount) != 0) ? 
+                        Number(amount) <= miner_info.bytecoins_amount ?
+                            <Links to="/SuccessWithdrawBYTE"> <ActiveConfirm>CONTINUE</ActiveConfirm> </Links> 
+                        : 
+                            <NonActiveConfirm>Not enough funds</NonActiveConfirm>
+                    : 
+                        <NonActiveConfirm>CONTINUE</NonActiveConfirm>}
             </ButtonContainer>
         </>
     )

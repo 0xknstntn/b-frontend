@@ -5,6 +5,7 @@ import { MinerBlock } from "./MinerBlock";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useMinersInfo, useProtocolInfo } from "../../../store/useProtocol";
+import { formatCash } from "../../../utils/utils";
 
 const Container = styled.div`
     width: 85%;
@@ -66,12 +67,12 @@ export const MainPage = () => {
                 <MainInfo>
                     <MainInfoBlock>
                         <MainText>Bytecoin</MainText>
-                        <Amount>{miner_info.bytecoins_amount} BYTE</Amount>
+                        <Amount>{formatCash(miner_info.bytecoins_amount)} BYTE</Amount>
                         <AmountDescription>
                             {
                                 isNaN((((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount)) 
                                 ? 0 : 
-                                (((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount) 
+                                formatCash((((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount))
                             } Mined today • {miner_info.miners_amount} NFT ASIC</AmountDescription>
                     </MainInfoBlock>
                     <Logo src={BytecoinLogo} />

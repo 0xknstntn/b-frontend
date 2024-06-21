@@ -1,11 +1,18 @@
 import { createStore } from './store';
 
+
+type ItemMetadata = {
+        address: string,
+        owner: string
+}
+
 export interface Miner {
         miner_address: string,
         miners_amount: number,
         battery_amount: number,
         bytecoins_amount: number,
         balance: number,
+        nfts: Array<ItemMetadata>
 };
 
 const defaultState: Miner = { 
@@ -13,7 +20,8 @@ const defaultState: Miner = {
         miners_amount: 0,
         battery_amount: 0,
         bytecoins_amount: 0,
-        balance: 0
+        balance: 0,
+        nfts: []
 };
 
 export const [useProtocolInfo] = createStore({

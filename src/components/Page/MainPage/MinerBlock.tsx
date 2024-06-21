@@ -2,6 +2,7 @@ import styled from "styled-components";
 import BuyMoreMiners from '../../../assets/BuyMoreMiners.webp'
 import { useMinersInfo, useProtocolInfo } from "../../../store/useProtocol";
 import { useState } from "react";
+import { formatCash } from "../../../utils/utils";
 
 const MainMinerContainer = styled.div`
     width: 100%;
@@ -81,13 +82,18 @@ export const MinerBlock = () => {
                         <AmountASIC>{miner_info.miners_amount} ASIC</AmountASIC>
                         <GreyText>{
                             isNaN(((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount ) ? 0 : 
-                            ((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount 
+                            formatCash(((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount)
                         } BYTE per 1 day</GreyText>
                     </AmountInfo>
                     <BuyMiners src={BuyMoreMiners}/>
                 </ASICContainer>
                 <LineReward />
-                <RewardTime>{miner_info.battery_amount} Batteries on balance ({miner_info.battery_amount} day)</RewardTime>
+                {miner_info.battery_amount == 0 && miner_info.miners_amount != 0 
+                ? 
+                    <RewardTime style={{color: "#ef5b5b"}}>{miner_info.battery_amount} Batteries on balance ({miner_info.battery_amount} day)</RewardTime> 
+                :
+                    <RewardTime>{miner_info.battery_amount} Batteries on balance ({miner_info.battery_amount} day)</RewardTime> 
+                }
             </MyMinerContainer>
         </MainMinerContainer>
     )
