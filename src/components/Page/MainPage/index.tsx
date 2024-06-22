@@ -68,12 +68,16 @@ export const MainPage = () => {
                     <MainInfoBlock>
                         <MainText>Bytecoin</MainText>
                         <Amount>{formatCash(miner_info.bytecoins_amount)} BYTE</Amount>
-                        <AmountDescription>
-                            {
-                                isNaN((((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount)) 
-                                ? 0 : 
-                                formatCash((((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount))
-                            } Mined today • {miner_info.miners_amount} NFT ASIC</AmountDescription>
+                        { protocol_info.epoch == 0 || protocol_info.miners_nft_count == 0 ? 
+                        <> <AmountDescription> 0 Mined today • {miner_info.miners_amount} NFT ASIC</AmountDescription> </> :
+                            <AmountDescription>
+                                {
+                                    isNaN((((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount)) 
+                                    ? 0 : 
+                                    formatCash((((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount))
+                                } Mined today • {miner_info.miners_amount} NFT ASIC
+                            </AmountDescription>
+                        }
                     </MainInfoBlock>
                     <Logo src={BytecoinLogo} />
                 </MainInfo>

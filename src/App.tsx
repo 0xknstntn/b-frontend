@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Index } from './components';
 import { useEffect } from 'react';
-import { useTonAddress } from '@tonconnect/ui-react';
+import { useTonAddress, useTonWallet } from '@tonconnect/ui-react';
 import { useMinersInfo, useProtocolInfo } from './store/useProtocol';
 
 const Main = styled.div`
@@ -13,6 +13,7 @@ const api_url = 'https://b-api-theta.vercel.app/api/api/v1'
 
 function App() {
 	const userFriendlyAddress = useTonAddress();
+	const wallet = useTonWallet();
 	console.log("My address: ", userFriendlyAddress)
 	const [ miner_info, setMinerInfo ] = useMinersInfo();
 	const [ protocol_info, setProtocolInfo ] = useProtocolInfo();
@@ -37,13 +38,15 @@ function App() {
 
 			let result_epoch = await fetch(api_url + `/protocol/epoch`)
 			let result_epoch_json = await result_epoch.json()
-			setProtocolInfo({
-				epoch: Number(result_epoch_json.result.epoch),
-				miners_nft_count: Number(result_miners_nft_count_json.result.miners_nft_count),
-			})
+			if (result_epoch_json.ok == "false" && result_miners_nft_count_json.ok == "false") {
+				setProtocolInfo({
+					epoch: Number(result_epoch_json.result.epoch),
+					miners_nft_count: Number(result_miners_nft_count_json.result.miners_nft_count),
+				})
+			}
 		}
 		main()
-	}, [userFriendlyAddress])
+	}, [wallet])
 	console.log(miner_info)
 	console.log(protocol_info)
 

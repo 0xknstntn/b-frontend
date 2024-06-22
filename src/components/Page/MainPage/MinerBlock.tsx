@@ -80,10 +80,13 @@ export const MinerBlock = () => {
                     <AmountInfo>
                         <GreyText>My Miners</GreyText>
                         <AmountASIC>{miner_info.miners_amount} ASIC</AmountASIC>
-                        <GreyText>{
-                            isNaN(((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount ) ? 0 : 
-                            formatCash(((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount)
-                        } BYTE per 1 day</GreyText>
+
+                        { protocol_info.epoch == 0 || protocol_info.miners_nft_count == 0 ? <GreyText>0 BYTE per 1 day</GreyText> :
+                            <GreyText>{
+                                isNaN(((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount ) ? 0 : 
+                                formatCash(((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount)
+                            } BYTE per 1 day</GreyText>
+                        }
                     </AmountInfo>
                     <BuyMiners src={BuyMoreMiners}/>
                 </ASICContainer>
