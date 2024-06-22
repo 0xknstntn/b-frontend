@@ -9,7 +9,7 @@ const Main = styled.div`
 	height: 100vh;
 `
 
-const api_url = 'http://localhost:13000/api/v1'
+const api_url = 'https://b-api-theta.vercel.app/api/api/v1'
 
 function App() {
 	const userFriendlyAddress = useTonAddress();
