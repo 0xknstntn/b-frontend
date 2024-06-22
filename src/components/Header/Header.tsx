@@ -29,7 +29,7 @@ export const Header = () => {
                     'Accept': 'application/json, text/plain, */*',
                     'Content-Type': 'application/json'
                  },
-                 body: JSON.stringify({ user_id: '765798766' /*window.Telegram.WebApp.initDataUnsafe.user?.id*/  })
+                 body: JSON.stringify({ user_id: /*'765798766'*/ window.Telegram.WebApp.initDataUnsafe.user?.id  })
              })
              const content = await response.json();
 
