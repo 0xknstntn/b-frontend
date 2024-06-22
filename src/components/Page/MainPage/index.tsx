@@ -68,7 +68,7 @@ export const MainPage = () => {
                     <MainInfoBlock>
                         <MainText>Bytecoin</MainText>
                         <Amount>{formatCash(miner_info.bytecoins_amount)} BYTE</Amount>
-                        { protocol_info.epoch == 0 || protocol_info.miners_nft_count == 0 ? 
+                        { protocol_info.epoch == 0 || protocol_info.miners_nft_count == 0 || miner_info.battery_amount == 0 || miner_info.miners_amount == 0 ? 
                         <> <AmountDescription> 0 Mined today • {miner_info.miners_amount} NFT ASIC</AmountDescription> </> :
                             <AmountDescription>
                                 {
