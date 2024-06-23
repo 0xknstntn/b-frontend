@@ -218,7 +218,7 @@ export const DepositMiner = () => {
                     (amount != "" && Number(amount) != 0) ? 
                         Number(amount) <= miner_info.nfts.length ?
                             <Links> <ActiveConfirm onClick={() => 
-                                () => tonConnectUI.sendTransaction(
+                                tonConnectUI.sendTransaction(
                                     DepositNFT(miner_info.nfts[0].address)
                                 )
                             }>CONTINUE</ActiveConfirm> </Links> 
