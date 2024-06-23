@@ -144,7 +144,7 @@ const LogoInButton = styled.img`
     margin-top: -2px;
 `
 
-const Links = styled(Link)`
+const Links = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -216,7 +216,7 @@ export const BuyBattery = () => {
                 {
                     Number(amount) != 0 ? 
                         (Number(amount) * 2 < (miner_info.balance / 10**9)) ?
-                            <Links to="/SuccessBuying"><ActiveConfirm onClick={() => tonConnectUI.sendTransaction(BuyBatteriesCell(Number(amount)))}>Buy for {Number(amount) * 2} <LogoInButton src={TonLogo}/></ActiveConfirm></Links> 
+                            <Links><ActiveConfirm onClick={() => tonConnectUI.sendTransaction(BuyBatteriesCell(Number(amount) * 2))}>Buy for {Number(amount) * 2} <LogoInButton src={TonLogo}/></ActiveConfirm></Links> 
                         : <NonActiveConfirm>Not enough funds</NonActiveConfirm>
                     : 
                         <NonActiveConfirm>Enter the number of batteries</NonActiveConfirm>}
