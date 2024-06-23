@@ -176,6 +176,25 @@ export const DepositMiner = () => {
         return myTransaction
     }
 
+    const DepositNftAction = async (nft_item_address: ItemMetadata[], amount: number) => {
+        let tx = DepositNFT(miner_info.nfts, Number(amount))
+
+        let changed_miner_info_nfts = (miner_info.nfts).splice(0, tx.messages.length);
+
+
+        let result = await tonConnectUI.sendTransaction(tx).then((data: any) => {
+            console.log("SUCCES SEND DEPOSIT")
+            setMinerInfo({
+                miner_address: miner_info.miner_address,
+                miners_amount: miner_info.miners_amount + 1,
+                battery_amount: miner_info.battery_amount,
+                bytecoins_amount: miner_info.bytecoins_amount,
+                balance: miner_info.balance,
+                nfts: changed_miner_info_nfts
+            })
+            window.open(`/SuccessfulDeposit`); 
+        })
+    }
 
     return (
         <>
@@ -223,9 +242,7 @@ export const DepositMiner = () => {
                     (amount != "" && Number(amount) != 0) ? 
                         Number(amount) <= miner_info.nfts.length ?
                             <Links> <ActiveConfirm onClick={() => 
-                                tonConnectUI.sendTransaction(
-                                    DepositNFT(miner_info.nfts, Number(amount))
-                                )
+                                DepositNftAction(miner_info.nfts, Number(amount))
                             }>CONTINUE</ActiveConfirm> </Links> 
                         : 
                             <NonActiveConfirm>Not enough funds</NonActiveConfirm>
