@@ -39,7 +39,7 @@ const AmountContainer = styled.div`
     margin-top: 20px;
 `
 
-const Input = styled.input`
+const Input = styled.input <{ anim: string }>`
     width: 230px;
     min-width: 1ch;
     height: 60px;
@@ -48,6 +48,21 @@ const Input = styled.input`
     color: #fff;
     background: transparent;
     padding: 0;
+    animation: ${(props: { anim: any; }) => props .anim};
+    @keyframes shake {
+        10%, 90% {
+            transform: translateX(-0.5px);
+        }
+        20%, 80% {
+            transform: translateX(1px);
+        }
+        30%, 50%, 70% {
+            transform: translateX(-2px);
+        }
+        40%, 60% {
+            transform: translateX(2px);
+        }
+    }
 `
 
 //letter-spacing
@@ -156,7 +171,9 @@ export const DepositMiner = () => {
                                     style={{ width: `${amount.length}ch`, color: "#ef5b5b" }}
                                     onChange={(e) => setAmount(e.target.value)}
                                     inputMode="numeric" pattern="[0-9]*"
-                                    placeholder="0"></Input>
+                                    placeholder="0"
+                                    anim="shake 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) both"    
+                                ></Input>
                                 <WithdrawNameTokenError>NFT</WithdrawNameTokenError>
                                 </> 
                             : 
@@ -166,7 +183,9 @@ export const DepositMiner = () => {
                                     style={{ width: `${amount.length}ch` }}
                                     onChange={(e) => setAmount(e.target.value)}
                                     inputMode="numeric" pattern="[0-9]*"
-                                    placeholder="0"></Input>
+                                    placeholder="0"
+                                    anim=""
+                                ></Input>
                                 <WithdrawNameToken>NFT</WithdrawNameToken>
                                 </> 
                             }

@@ -1,0 +1,1 @@
+export const BytecoinProtocolAddress = 'kQDgle7nXgxjFu-q6jLMW96z-FwtlXEQvSVv56XcdzmeAZLo'

@@ -3,6 +3,8 @@ import TonLogo from '../../../assets/TonLogo.svg'
 import { useState, useEffect, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMinersInfo } from "../../../store/useProtocol";
+import { useTonConnectUI } from "@tonconnect/ui-react";
+import { BytecoinProtocolAddress } from "../../../utils/const";
 
 const Container = styled.div`
     width: 85%;
@@ -38,7 +40,7 @@ const AmountContainer = styled.div`
     margin-top: 20px;
 `
 
-const Input = styled.input`
+const Input = styled.input <{ anim: string }>`
     width: 230px;
     min-width: 1ch;
     height: 60px;
@@ -47,6 +49,21 @@ const Input = styled.input`
     color: #fff;
     background: transparent;
     padding: 0;
+    animation: ${(props: { anim: any; }) => props .anim};
+    @keyframes shake {
+        10%, 90% {
+            transform: translateX(-0.5px);
+        }
+        20%, 80% {
+            transform: translateX(1px);
+        }
+        30%, 50%, 70% {
+            transform: translateX(-2px);
+        }
+        40%, 60% {
+            transform: translateX(2px);
+        }
+    }
 `
 
 const WithdrawNameToken = styled.a`
@@ -83,9 +100,8 @@ const ButtonContainer = styled.div`
     height: 45px;
     display: flex;
     justify-content: center;
-    margin-top: 50px;
     position: fixed;
-    bottom: 50px;
+    bottom: 20px;
 `
 
 const NonActiveConfirm = styled.button`
@@ -139,8 +155,9 @@ const Links = styled(Link)`
 
 export const BuyBattery = () => {
 
-    const [amount, setAmount] = useState('');
+    const [ amount, setAmount] = useState('');
     const [ miner_info, setMinerInfo ] = useMinersInfo();
+    const [ tonConnectUI, setOptions] = useTonConnectUI();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -152,7 +169,19 @@ export const BuyBattery = () => {
         setAmount(e.target.value)
     };
 
-    console.log(miner_info)
+    const BuyBatteriesCell = (amount: number) => {
+        const myTransaction = {
+            validUntil: Math.floor(Date.now() / 1000) + 360,
+            messages: [
+                {
+                    address: BytecoinProtocolAddress,
+                    amount: ((amount + 0.05) * 10**9).toString(),
+                    payload: "te6cckEBAQEADgAAGAAAAGQAAAAAAAAAAHSjJwk="
+                }
+            ]
+        }
+        return myTransaction
+    }
 
     return (
         <>
@@ -164,11 +193,11 @@ export const BuyBattery = () => {
                     <AmountContainer>
                         <InputContainer>
                             { ((Number(amount) * 2 > (miner_info.balance / 10**9)) || ( miner_info.miners_amount == 0 )) && (Number(amount) != 0) ? 
-                                <> <Input value={amount} style={{ maxWidth: `${amount.length}ch`, color: "#ef5b5b" }} onChange={HandleInputAmpunt} inputMode='numeric' placeholder="0"></Input> 
+                                <> <Input value={amount} style={{ maxWidth: `${amount.length}ch`, color: "#ef5b5b" }} anim="shake 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) both" onChange={HandleInputAmpunt} inputMode='numeric' placeholder="0"></Input> 
                                 <WithdrawNameTokenMany>batteries</WithdrawNameTokenMany> </> 
                             : 
                                 
-                                <> <Input value={amount} style={{ maxWidth: `${amount.length}ch` }} onChange={HandleInputAmpunt} inputMode='numeric' placeholder="0"></Input> 
+                                <> <Input value={amount} style={{ maxWidth: `${amount.length}ch` }} anim='' onChange={HandleInputAmpunt} inputMode='numeric' placeholder="0"></Input> 
                                 <WithdrawNameToken>batteries</WithdrawNameToken> </> 
                             }
                         </InputContainer>
@@ -187,7 +216,7 @@ export const BuyBattery = () => {
                 {
                     Number(amount) != 0 ? 
                         (Number(amount) * 2 < (miner_info.balance / 10**9)) ?
-                            <Links to="/SuccessBuying"><ActiveConfirm>Buy for {Number(amount) * 2} <LogoInButton src={TonLogo}/></ActiveConfirm></Links> 
+                            <Links to="/SuccessBuying"><ActiveConfirm onClick={() => tonConnectUI.sendTransaction(BuyBatteriesCell(Number(amount)))}>Buy for {Number(amount) * 2} <LogoInButton src={TonLogo}/></ActiveConfirm></Links> 
                         : <NonActiveConfirm>Not enough funds</NonActiveConfirm>
                     : 
                         <NonActiveConfirm>Enter the number of batteries</NonActiveConfirm>}
