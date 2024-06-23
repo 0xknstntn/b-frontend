@@ -29,4 +29,6 @@ export const [useProtocolInfo] = createStore({
         miners_nft_count: 0,
 });
 
+export const [useBody] = createStore({body: ""});
+
 export const [useMinersInfo] = createStore(defaultState);

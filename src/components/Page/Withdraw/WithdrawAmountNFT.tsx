@@ -3,6 +3,8 @@ import Laptop from '../../../assets/laptop.webp'
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMinersInfo } from "../../../store/useProtocol";
+import { SendTransactionRequest, useTonConnectUI } from "@tonconnect/ui-react";
+import { BytecoinProtocolAddress } from "../../../utils/const";
 
 const Container = styled.div`
     width: 85%;
@@ -131,7 +133,7 @@ const ActiveConfirm = styled.button`
     font-size: 15px;
 `
 
-const Links = styled(Link)`
+const Links = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -145,11 +147,29 @@ export const WithdrawAmountNFT = () => {
     const [ amount, setAmount ] = useState('');
     const navigate = useNavigate();
     const [ miner_info, setMinerInfo ] = useMinersInfo();
+    const [ tonConnectUI, setOptions] = useTonConnectUI();
 
     useEffect(() => {
 		window.Telegram.WebApp.BackButton.show()
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
 	}, [])
+
+    const WithdrawalNFT = (amount: number) => {
+        let parsed_amount = (0.12 * 10**9)
+        let myTransaction: SendTransactionRequest = {
+            validUntil: Math.floor(Date.now() / 1000) + 600,
+            messages: []
+        }
+        for (let index = 0; index < amount; index++) {
+            myTransaction.messages.push({
+                address: BytecoinProtocolAddress,
+                amount: parsed_amount.toString(),
+                payload: "te6cckEBAQEADgAAGAAAAZAAAAAAAAAAAOWSCPQ="
+            })
+        }
+
+        return myTransaction
+    }
 
     return (
         <>
@@ -189,7 +209,11 @@ export const WithdrawAmountNFT = () => {
                 { 
                     (amount != "" && Number(amount) != 0 ) ?
                         Number(amount) <= miner_info.miners_amount ?
-                            <Links to="/SuccessWithdrawNFT"><ActiveConfirm>CONTINUE</ActiveConfirm></Links> 
+                            <Links><ActiveConfirm onClick={() => 
+                                tonConnectUI.sendTransaction(
+                                    WithdrawalNFT(Number(amount))
+                                )
+                            }>CONTINUE</ActiveConfirm></Links> 
                         : 
                             <NonActiveConfirm>Not enough funds</NonActiveConfirm>
                     : 

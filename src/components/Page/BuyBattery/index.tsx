@@ -177,7 +177,7 @@ export const BuyBattery = () => {
                 {
                     address: BytecoinProtocolAddress,
                     amount: parsed_amount.toString(),
-                    payload: "te6cckEBAQEADgAAGAAAAGQAAAAAAAAAAHSjJwk="
+                    payload: "te6cckEBAQEAFgAAKAAAAGQAAAAAAAAAAAAAAAAAAAPoBxE63A=="
                 }
             ]
         }

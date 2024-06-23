@@ -2,7 +2,9 @@ import styled from "styled-components";
 import BytecoinLogo from '../../../assets/BytecoinLogo.png'
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useMinersInfo } from "../../../store/useProtocol";
+import { useBody, useMinersInfo } from "../../../store/useProtocol";
+import { BytecoinProtocolAddress } from "../../../utils/const";
+import { SendTransactionRequest, useTonConnectUI } from "@tonconnect/ui-react";
 
 const Container = styled.div`
     width: 85%;
@@ -130,7 +132,7 @@ const ActiveConfirm = styled.button`
     font-size: 15px;
 `
 
-const Links = styled(Link)`
+const Links = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -138,17 +140,45 @@ const Links = styled(Link)`
     text-decoration: none;
 `
 
+const api_url = 'https://b-api-theta.vercel.app/api/api/v1'
 
 export const WithdrawAmountBYTE = () => {
 
-    const [amount, setAmount] = useState('');
+    const [ amount, setAmount] = useState('');
+    const [ body, setBody] = useBody()
     const navigate = useNavigate();
     const [ miner_info, setMinerInfo ] = useMinersInfo();
+    const [ tonConnectUI, setOptions] = useTonConnectUI();
 
     useEffect(() => {
 		window.Telegram.WebApp.BackButton.show()
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
 	}, [])
+
+    const GetWithdrawalByteBody = async (amount: string) => {
+        let result = await fetch(api_url + `/msg/withdrawal_byte?amount=${amount}`)
+        let result_json = await result.json()
+        if (result_json.ok == "true") {
+            setBody({
+                body: result_json.result.payload
+            })
+        }
+    }
+
+    const WithdrawalByte = (amount: string) => {    
+        let parsed_amount = (0.1 * 10**9)
+        const myTransaction: SendTransactionRequest = {
+            validUntil: Math.floor(Date.now() / 1000) + 600,
+            messages: [
+                {
+                    address: BytecoinProtocolAddress,
+                    amount: parsed_amount.toString(),
+                    payload: body.body
+                }
+            ]
+        }
+        return myTransaction
+    }
 
     return (
         <>
@@ -177,7 +207,13 @@ export const WithdrawAmountBYTE = () => {
                 {
                     (amount != "" && Number(amount) != 0) ? 
                         Number(amount) <= miner_info.bytecoins_amount ?
-                            <Links to="/SuccessWithdrawBYTE"> <ActiveConfirm>CONTINUE</ActiveConfirm> </Links> 
+                            <Links> <ActiveConfirm onClick={() => {
+                                    GetWithdrawalByteBody(amount);
+                                    tonConnectUI.sendTransaction(
+                                        WithdrawalByte(amount)
+                                    )
+                                }
+                            }>CONTINUE</ActiveConfirm> </Links> 
                         : 
                             <NonActiveConfirm>Not enough funds</NonActiveConfirm>
                     : 
