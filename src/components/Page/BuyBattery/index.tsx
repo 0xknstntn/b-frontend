@@ -171,17 +171,19 @@ export const BuyBattery = () => {
 
     const BuyBatteriesCell = (amount: number) => {
         const myTransaction = {
-            validUntil: Math.floor(Date.now() / 1000) + 360,
+            validUntil: Math.floor(Date.now() / 1000) + 600,
             messages: [
                 {
                     address: BytecoinProtocolAddress,
-                    amount: ((amount + 0.05) * 10**9).toString(),
+                    amount: (((amount * 2) + 0.05) * 10**9).toString(),
                     payload: "te6cckEBAQEADgAAGAAAAGQAAAAAAAAAAHSjJwk="
                 }
             ]
         }
         return myTransaction
     }
+
+    console.log(BuyBatteriesCell(1))
 
     return (
         <>
@@ -216,7 +218,7 @@ export const BuyBattery = () => {
                 {
                     Number(amount) != 0 ? 
                         (Number(amount) * 2 < (miner_info.balance / 10**9)) ?
-                            <Links><ActiveConfirm onClick={() => tonConnectUI.sendTransaction(BuyBatteriesCell(Number(amount) * 2))}>Buy for {Number(amount) * 2} <LogoInButton src={TonLogo}/></ActiveConfirm></Links> 
+                            <Links><ActiveConfirm onClick={() => tonConnectUI.sendTransaction(BuyBatteriesCell(Number(amount)))}>Buy for {Number(amount) * 2} <LogoInButton src={TonLogo}/></ActiveConfirm></Links> 
                         : <NonActiveConfirm>Not enough funds</NonActiveConfirm>
                     : 
                         <NonActiveConfirm>Enter the number of batteries</NonActiveConfirm>}
