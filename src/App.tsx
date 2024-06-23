@@ -38,7 +38,7 @@ function App() {
 
 			let result_epoch = await fetch(api_url + `/protocol/epoch`)
 			let result_epoch_json = await result_epoch.json()
-			if (result_epoch_json.ok == "false" && result_miners_nft_count_json.ok == "false") {
+			if (result_epoch_json.ok == "true" && result_miners_nft_count_json.ok == "true") {
 				setProtocolInfo({
 					epoch: Number(result_epoch_json.result.epoch),
 					miners_nft_count: Number(result_miners_nft_count_json.result.miners_nft_count),
