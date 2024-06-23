@@ -165,25 +165,24 @@ export const BuyBattery = () => {
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
     }, [])
 
-    const HandleInputAmpunt = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const HandleInputAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
         setAmount(e.target.value)
     };
 
-    const BuyBatteriesCell = (amount: number) => {
+    const BuyBatteriesCell = (amount: string) => {
+        let parsed_amount = (((Number(amount) * 2) + 0.05) * 10**9)
         const myTransaction = {
             validUntil: Math.floor(Date.now() / 1000) + 600,
             messages: [
                 {
                     address: BytecoinProtocolAddress,
-                    amount: (((amount * 2) + 0.05) * 10**9).toString(),
+                    amount: parsed_amount.toString(),
                     payload: "te6cckEBAQEADgAAGAAAAGQAAAAAAAAAAHSjJwk="
                 }
             ]
         }
         return myTransaction
     }
-
-    console.log(BuyBatteriesCell(1))
 
     return (
         <>
@@ -195,11 +194,11 @@ export const BuyBattery = () => {
                     <AmountContainer>
                         <InputContainer>
                             { ((Number(amount) * 2 > (miner_info.balance / 10**9)) || ( miner_info.miners_amount == 0 )) && (Number(amount) != 0) ? 
-                                <> <Input value={amount} style={{ maxWidth: `${amount.length}ch`, color: "#ef5b5b" }} anim="shake 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) both" onChange={HandleInputAmpunt} inputMode='numeric' placeholder="0"></Input> 
+                                <> <Input value={amount} style={{ maxWidth: `${amount.length}ch`, color: "#ef5b5b" }} anim="shake 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) both" onChange={HandleInputAmount} inputMode='numeric' placeholder="0"></Input> 
                                 <WithdrawNameTokenMany>batteries</WithdrawNameTokenMany> </> 
                             : 
                                 
-                                <> <Input value={amount} style={{ maxWidth: `${amount.length}ch` }} anim='' onChange={HandleInputAmpunt} inputMode='numeric' placeholder="0"></Input> 
+                                <> <Input value={amount} style={{ maxWidth: `${amount.length}ch` }} anim='' onChange={HandleInputAmount} inputMode='numeric' placeholder="0"></Input> 
                                 <WithdrawNameToken>batteries</WithdrawNameToken> </> 
                             }
                         </InputContainer>
@@ -218,7 +217,11 @@ export const BuyBattery = () => {
                 {
                     Number(amount) != 0 ? 
                         (Number(amount) * 2 < (miner_info.balance / 10**9)) ?
-                            <Links><ActiveConfirm onClick={() => tonConnectUI.sendTransaction(BuyBatteriesCell(Number(amount)))}>Buy for {Number(amount) * 2} <LogoInButton src={TonLogo}/></ActiveConfirm></Links> 
+                            <Links><ActiveConfirm onClick={
+                                () => tonConnectUI.sendTransaction(
+                                    BuyBatteriesCell(amount)
+                                )
+                            }>Buy for {Number(amount) * 2} <LogoInButton src={TonLogo}/></ActiveConfirm></Links> 
                         : <NonActiveConfirm>Not enough funds</NonActiveConfirm>
                     : 
                         <NonActiveConfirm>Enter the number of batteries</NonActiveConfirm>}

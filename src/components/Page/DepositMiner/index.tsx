@@ -3,6 +3,7 @@ import NFTASIC from '../../../assets/laptop.webp'
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMinersInfo } from "../../../store/useProtocol";
+import { useTonConnectUI } from "@tonconnect/ui-react";
 
 const Container = styled.div`
     width: 85%;
@@ -133,7 +134,7 @@ const ActiveConfirm = styled.button`
 `
 
 
-const Links = styled(Link)`
+const Links = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -144,14 +145,32 @@ const Links = styled(Link)`
 
 export const DepositMiner = () => {
 
-    const [amount, setAmount] = useState('');
+    const [ amount, setAmount] = useState('');
     const navigate = useNavigate();
     const [ miner_info, setMinerInfo ] = useMinersInfo();
+    const [ tonConnectUI, setOptions] = useTonConnectUI();
 
     useEffect(() => {
         window.Telegram.WebApp.BackButton.show()
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
     }, [])
+
+    const DepositNFT = (nft_item_address: string) => {
+        let parsed_amount = (0.12 * 10**9)
+        const myTransaction = {
+            validUntil: Math.floor(Date.now() / 1000) + 600,
+            messages: [
+                {
+                    address: nft_item_address,
+                    amount: parsed_amount.toString(),
+                    payload: "te6cckEBAQEANQAAZV/MPRQAAAAAAAAAAIAcEr3c68GMYt31XUZZi3vWfwuFsq4iF6St/PS7juczwCEBCwdgEPiYp5k="
+                }
+            ]
+        }
+        console.log(myTransaction)
+        return myTransaction
+    }
+
 
     return (
         <>
@@ -198,7 +217,11 @@ export const DepositMiner = () => {
                 {
                     (amount != "" && Number(amount) != 0) ? 
                         Number(amount) <= miner_info.nfts.length ?
-                            <Links to="/SuccessDeposit"> <ActiveConfirm>CONTINUE</ActiveConfirm> </Links> 
+                            <Links> <ActiveConfirm onClick={() => 
+                                () => tonConnectUI.sendTransaction(
+                                    DepositNFT(miner_info.nfts[0].address)
+                                )
+                            }>CONTINUE</ActiveConfirm> </Links> 
                         : 
                             <NonActiveConfirm>Not enough funds</NonActiveConfirm>
                     : 
