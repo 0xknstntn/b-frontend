@@ -193,7 +193,10 @@ export const DepositMiner = () => {
                 balance: miner_info.balance,
                 nfts: changed_miner_info_nfts
             })
-            window.open(`/depositminer/SuccessDeposit`, '_blank'); 
+
+            let win = window.open(`/SuccessDeposit`, '_blank'); 
+            win?.focus()
+            
         })
     }
 
