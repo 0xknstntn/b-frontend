@@ -170,14 +170,23 @@ export const BuyBattery = () => {
     };
 
     const BuyBatteriesCell = (amount: string) => {
-        let parsed_amount = (((Number(amount) * 2) + 0.05) * 10**9)
+        let number_amount = Number(amount)
+    
+        let price = 2
+
+
+        let parsed_amount = ((number_amount * 2) + 0.05) * 10**9
+
+        console.log(parsed_amount)
+
         const myTransaction = {
-            validUntil: Math.floor(Date.now() / 1000) + 600,
+            validUntil: Math.floor(Date.now() / 1000) + 300,
             messages: [
                 {
-                    address: BytecoinProtocolAddress,
-                    amount: parsed_amount.toString(),
-                    payload: "te6cckEBAQEAFgAAKAAAAGQAAAAAAAAAAAAAAAAAAAPoBxE63A=="
+                    address: "EQDgle7nXgxjFu-q6jLMW96z-FwtlXEQvSVv56XcdzmeASli",
+                    amount: parsed_amount.toFixed(0),
+                    //amount: "2000000000",
+                    payload: "te6cckEBAQEADgAAGAAAAGQAAAAAAAAAAHSjJwk="
                 }
             ]
         }
