@@ -178,25 +178,9 @@ export const DepositMiner = () => {
 
     const DepositNftAction = async (nft_item_address: ItemMetadata[], amount: number) => {
         let tx = DepositNFT(miner_info.nfts, Number(amount))
-
-        let changed_miner_info_nfts = (miner_info.nfts).splice(0, tx.messages.length);
-
         let result = tonConnectUI.sendTransaction(tx);
         result.then((res) => {
-            console.log(res.boc)
-            console.log("SUCCES SEND DEPOSIT")
-            setMinerInfo({
-                miner_address: miner_info.miner_address,
-                miners_amount: miner_info.miners_amount + 1,
-                battery_amount: miner_info.battery_amount,
-                bytecoins_amount: miner_info.bytecoins_amount,
-                balance: miner_info.balance,
-                nfts: changed_miner_info_nfts
-            })
-
-            let win = window.open(`/SuccessDeposit`, '_blank'); 
-            win?.focus()
-            
+            navigate("/SuccessDeposit");
         })
     }
 
