@@ -3,7 +3,7 @@ import Laptop from '../../../assets/laptop.webp'
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMinersInfo } from "../../../store/useProtocol";
-import { SendTransactionRequest, useTonConnectUI } from "@tonconnect/ui-react";
+import { SendTransactionRequest, useTonAddress, useTonConnectUI } from "@tonconnect/ui-react";
 import { BytecoinProtocolAddress } from "../../../utils/const";
 
 const Container = styled.div`
@@ -141,9 +141,10 @@ const Links = styled.div`
     text-decoration: none;
 `
 
+const api_url = 'https://b-api-theta.vercel.app/api/api/v1'
 
 export const WithdrawAmountNFT = () => {
-
+    const userFriendlyAddress = useTonAddress();
     const [ amount, setAmount ] = useState('');
     const navigate = useNavigate();
     const [ miner_info, setMinerInfo ] = useMinersInfo();
@@ -176,6 +177,20 @@ export const WithdrawAmountNFT = () => {
         let result = tonConnectUI.sendTransaction(tx);
         result.then((res) => {
             navigate("/SuccessWithdrawNFT");
+            setTimeout(async function() {
+                let result = await fetch(api_url + `/miners?address=${userFriendlyAddress}`)
+                let result_json = await result.json()
+                if (result_json.ok == "true") {
+                    setMinerInfo({
+                        miner_address: userFriendlyAddress,
+                        miners_amount: result_json.result.miners_amount,
+                        battery_amount: result_json.result.battery_amount,
+                        bytecoins_amount: result_json.result.bytecoins_amount,
+                        balance: result_json.result.balance,
+                        nfts: result_json.result.items
+                    })
+                }
+            }, 10000);
         })
     }
 

@@ -171,14 +171,7 @@ export const BuyBattery = () => {
 
     const BuyBatteriesCell = (amount: string) => {
         let number_amount = Number(amount)
-    
-        let price = 2
-
-
         let parsed_amount = ((number_amount * 2) + 0.05) * 10**9
-
-        console.log(parsed_amount)
-
         const myTransaction = {
             validUntil: Math.floor(Date.now() / 1000) + 300,
             messages: [
@@ -217,7 +210,7 @@ export const BuyBattery = () => {
             </Container>
             <div style={{width: "85%", marginTop: "20px"}}>
                 <Description>
-                    Every NFT miners spends 1 battery a block.<br/>
+                    Every NFT miner spends 1 battery a block (1 day).<br/>
                     If you don't have enough batteries on your<br/>
                     balance, the NFT miners won't work.
                 </Description>
