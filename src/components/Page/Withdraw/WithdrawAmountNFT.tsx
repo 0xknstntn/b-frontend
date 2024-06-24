@@ -171,6 +171,14 @@ export const WithdrawAmountNFT = () => {
         return myTransaction
     }
 
+    const WithdrawalNFTAction = async (amount: number) => {
+        let tx = WithdrawalNFT(amount)
+        let result = tonConnectUI.sendTransaction(tx);
+        result.then((res) => {
+            navigate("/SuccessWithdrawNFT");
+        })
+    }
+
     return (
         <>
             <Container>
@@ -210,9 +218,7 @@ export const WithdrawAmountNFT = () => {
                     (amount != "" && Number(amount) != 0 ) ?
                         Number(amount) <= miner_info.miners_amount ?
                             <Links><ActiveConfirm onClick={() => 
-                                tonConnectUI.sendTransaction(
-                                    WithdrawalNFT(Number(amount))
-                                )
+                                WithdrawalNFTAction(Number(amount))
                             }>CONTINUE</ActiveConfirm></Links> 
                         : 
                             <NonActiveConfirm>Not enough funds</NonActiveConfirm>
