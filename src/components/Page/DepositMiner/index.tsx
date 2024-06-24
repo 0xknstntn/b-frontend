@@ -181,8 +181,9 @@ export const DepositMiner = () => {
 
         let changed_miner_info_nfts = (miner_info.nfts).splice(0, tx.messages.length);
 
-
-        let result = await tonConnectUI.sendTransaction(tx).then((data: any) => {
+        let result = tonConnectUI.sendTransaction(tx);
+        result.then((res) => {
+            console.log(res.boc)
             console.log("SUCCES SEND DEPOSIT")
             setMinerInfo({
                 miner_address: miner_info.miner_address,
@@ -192,7 +193,7 @@ export const DepositMiner = () => {
                 balance: miner_info.balance,
                 nfts: changed_miner_info_nfts
             })
-            window.open(`/SuccessfulDeposit`); 
+            window.open(`/depositminer/SuccessDeposit`, '_blank'); 
         })
     }
 
