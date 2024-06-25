@@ -196,11 +196,27 @@ export const BuyBattery = () => {
                     <AmountContainer>
                         <InputContainer>
                             { ((Number(amount) * 2 > (miner_info.balance / 10**9)) || ( miner_info.miners_amount == 0 )) && (Number(amount) != 0) ? 
-                                <> <Input value={amount} style={{ maxWidth: `${amount.length}ch`, color: "#ef5b5b" }} anim="shake 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) both" onChange={HandleInputAmount} inputMode='numeric' placeholder="0"></Input> 
+                                <> 
+                                <Input 
+                                value={amount} 
+                                style={{ maxWidth: `${amount.length}ch`, color: "#ef5b5b" }} 
+                                anim="shake 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) both" 
+                                onChange={HandleInputAmount} 
+                                inputMode='numeric' 
+                                placeholder="0">
+                                </Input> 
                                 <WithdrawNameTokenMany>batteries</WithdrawNameTokenMany> </> 
                             : 
                                 
-                                <> <Input value={amount} style={{ maxWidth: `${amount.length}ch` }} anim='' onChange={HandleInputAmount} inputMode='numeric' placeholder="0"></Input> 
+                                <> 
+                                <Input 
+                                value={amount} 
+                                style={{ maxWidth: `${amount.length}ch` }} 
+                                anim='' 
+                                onChange={HandleInputAmount} 
+                                inputMode='numeric' 
+                                placeholder="0">
+                                </Input> 
                                 <WithdrawNameToken>batteries</WithdrawNameToken> </> 
                             }
                         </InputContainer>

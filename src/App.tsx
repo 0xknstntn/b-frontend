@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Index } from './components';
 import { useEffect } from 'react';
-import { useTonAddress, useTonWallet } from '@tonconnect/ui-react';
+import { useTonAddress, useTonConnectUI, useTonWallet, TonConnectUiOptions, THEME } from '@tonconnect/ui-react';
 import { useMinersInfo, useProtocolInfo } from './store/useProtocol';
 
 const Main = styled.div`
@@ -17,6 +17,16 @@ function App() {
 	console.log("My address: ", userFriendlyAddress)
 	const [ miner_info, setMinerInfo ] = useMinersInfo();
 	const [ protocol_info, setProtocolInfo ] = useProtocolInfo();
+	const [ tonConnectUI, setOptions] = useTonConnectUI();
+
+	setOptions({
+		actionsConfiguration: {
+			notifications: []
+		},
+		uiPreferences: {
+			theme: THEME.LIGHT
+		}
+	})
 
 	useEffect(() => {
 		async function main() {
