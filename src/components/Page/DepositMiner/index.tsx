@@ -171,7 +171,7 @@ export const DepositMiner = () => {
             myTransaction.messages.push({
                 address: nft_item_address[index].address,
                 amount: parsed_amount.toString(),
-                payload: "te6cckEBAQEANQAAZV/MPRQAAAAAAAAAAIAcEr3c68GMYt31XUZZi3vWfwuFsq4iF6St/PS7juczwCEBCwdgEPiYp5k="
+                payload: "te6cckEBAQEANQAAZV/MPRQAAAAAAAAAAIABkquOcngq3YtWZ/s4oreKm7ikH1bbTSaQt6ly5kFMLUEBCwdgENnXtO0="
             })
         }
 
