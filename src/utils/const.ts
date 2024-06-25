@@ -1,1 +1,1 @@
-export const BytecoinProtocolAddress = '0:e095eee75e0c6316efaaea32cc5bdeb3f85c2d957110bd256fe7a5dc77399e01'
+export const BytecoinProtocolAddress = '0:0c955c7393c156ec5ab33fd9c515bc54ddc520fab6da693485bd4b97320a616a'
