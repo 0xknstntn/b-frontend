@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useBody, useMinersInfo } from "../../../store/useProtocol";
 import { BytecoinProtocolAddress } from "../../../utils/const";
-import { SendTransactionRequest, useTonConnectUI } from "@tonconnect/ui-react";
+import { SendTransactionRequest, useTonAddress, useTonConnectUI } from "@tonconnect/ui-react";
 
 const Container = styled.div`
     width: 85%;
@@ -143,9 +143,8 @@ const Links = styled.div`
 const api_url = 'https://b-api-theta.vercel.app/api/api/v1'
 
 export const WithdrawAmountBYTE = () => {
-
+    const userFriendlyAddress = useTonAddress();
     const [ amount, setAmount] = useState('');
-    const [ body, setBody] = useBody()
     const navigate = useNavigate();
     const [ miner_info, setMinerInfo ] = useMinersInfo();
     const [ tonConnectUI, setOptions] = useTonConnectUI();
@@ -159,13 +158,12 @@ export const WithdrawAmountBYTE = () => {
         let result = await fetch(api_url + `/msg/withdrawal_byte?amount=${amount}`)
         let result_json = await result.json()
         if (result_json.ok == "true") {
-            setBody({
-                body: result_json.result.payload
-            })
+            return result_json.result.payload
         }
+        return ""
     }
 
-    const WithdrawalByte = (amount: string) => {    
+    const WithdrawalByte = (amount: string, body: string) => {    
         let parsed_amount = (0.1 * 10**9)
         const myTransaction: SendTransactionRequest = {
             validUntil: Math.floor(Date.now() / 1000) + 600,
@@ -173,11 +171,34 @@ export const WithdrawAmountBYTE = () => {
                 {
                     address: BytecoinProtocolAddress,
                     amount: parsed_amount.toString(),
-                    payload: body.body
+                    payload: body
                 }
             ]
         }
         return myTransaction
+    }
+
+    const WithdrawalByteAction = async (mount: string) => {
+        let body = await GetWithdrawalByteBody(amount)
+        let tx = WithdrawalByte(amount, body)
+        let result = tonConnectUI.sendTransaction(tx);
+        result.then((res) => {
+            navigate("/SuccessWithdrawBYTE");
+            setTimeout(async function() {
+                let result = await fetch(api_url + `/miners?address=${userFriendlyAddress}`)
+                let result_json = await result.json()
+                if (result_json.ok == "true") {
+                    setMinerInfo({
+                        miner_address: userFriendlyAddress,
+                        miners_amount: result_json.result.miners_amount,
+                        battery_amount: result_json.result.battery_amount,
+                        bytecoins_amount: result_json.result.bytecoins_amount,
+                        balance: result_json.result.balance,
+                        nfts: result_json.result.items
+                    })
+                }
+            }, 10000);
+        })
     }
 
     return (
@@ -205,13 +226,10 @@ export const WithdrawAmountBYTE = () => {
             </Container>
             <ButtonContainer>
                 {
-                    (amount != "" && Number(amount) != 0) ? 
+                    (amount != "" && Number(amount) != 0 && Number(amount) > 4) ? 
                         Number(amount) <= miner_info.bytecoins_amount ?
                             <Links> <ActiveConfirm onClick={() => {
-                                    GetWithdrawalByteBody(amount);
-                                    tonConnectUI.sendTransaction(
-                                        WithdrawalByte(amount)
-                                    )
+                                    WithdrawalByteAction(amount)
                                 }
                             }>CONTINUE</ActiveConfirm> </Links> 
                         : 

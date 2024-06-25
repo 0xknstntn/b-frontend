@@ -3,7 +3,7 @@ import TonLogo from '../../../assets/TonLogo.svg'
 import { useState, useEffect, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMinersInfo } from "../../../store/useProtocol";
-import { useTonConnectUI } from "@tonconnect/ui-react";
+import { useTonAddress, useTonConnectUI } from "@tonconnect/ui-react";
 import { BytecoinProtocolAddress } from "../../../utils/const";
 
 const Container = styled.div`
@@ -152,9 +152,10 @@ const Links = styled.div`
     text-decoration: none;
 `
 
+const api_url = 'https://b-api-theta.vercel.app/api/api/v1'
 
 export const BuyBattery = () => {
-
+    const userFriendlyAddress = useTonAddress();
     const [ amount, setAmount] = useState('');
     const [ miner_info, setMinerInfo ] = useMinersInfo();
     const [ tonConnectUI, setOptions] = useTonConnectUI();
@@ -169,7 +170,7 @@ export const BuyBattery = () => {
         setAmount(e.target.value)
     };
 
-    const BuyBatteriesCell = (amount: string) => {
+    const BuyBatteries = (amount: string) => {
         let number_amount = Number(amount)
         let parsed_amount = ((number_amount * 2) + 0.05) * 10**9
         const myTransaction = {
@@ -184,6 +185,28 @@ export const BuyBattery = () => {
             ]
         }
         return myTransaction
+    }
+
+    const BuyBatteriesAction = async (mount: string) => {
+        let tx = BuyBatteries(amount)
+        let result = tonConnectUI.sendTransaction(tx);
+        result.then((res) => {
+            navigate("/SuccessBuying");
+            setTimeout(async function() {
+                let result = await fetch(api_url + `/miners?address=${userFriendlyAddress}`)
+                let result_json = await result.json()
+                if (result_json.ok == "true") {
+                    setMinerInfo({
+                        miner_address: userFriendlyAddress,
+                        miners_amount: result_json.result.miners_amount,
+                        battery_amount: result_json.result.battery_amount,
+                        bytecoins_amount: result_json.result.bytecoins_amount,
+                        balance: result_json.result.balance,
+                        nfts: result_json.result.items
+                    })
+                }
+            }, 10000);
+        })
     }
 
     return (
@@ -236,9 +259,7 @@ export const BuyBattery = () => {
                     Number(amount) != 0 ? 
                         (Number(amount) * 2 < (miner_info.balance / 10**9)) ?
                             <Links><ActiveConfirm onClick={
-                                () => tonConnectUI.sendTransaction(
-                                    BuyBatteriesCell(amount)
-                                )
+                                () => BuyBatteriesAction(amount)
                             }>Buy for {Number(amount) * 2} <LogoInButton src={TonLogo}/></ActiveConfirm></Links> 
                         : <NonActiveConfirm>Not enough funds</NonActiveConfirm>
                     : 

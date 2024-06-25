@@ -211,13 +211,14 @@ export const DepositMiner = () => {
                     <AmountContainer>
                         <InputContainer>
 
-                            { Number(amount) > miner_info.nfts.length ? 
+                            { Number(amount) > miner_info.nfts.length || Number(amount) > 4 ? 
                                 <> 
                                 <Input
                                     value={amount}
                                     style={{ width: `${amount.length}ch`, color: "#ef5b5b" }}
                                     onChange={(e) => setAmount(e.target.value)}
-                                    inputMode="numeric" pattern="[0-9]*"
+                                    inputMode="numeric" 
+                                    pattern="[0-9]*"
                                     placeholder="0"
                                     anim="shake 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) both"    
                                 ></Input>
@@ -229,7 +230,8 @@ export const DepositMiner = () => {
                                     value={amount}
                                     style={{ width: `${amount.length}ch` }}
                                     onChange={(e) => setAmount(e.target.value)}
-                                    inputMode="numeric" pattern="[0-9]*"
+                                    inputMode="numeric" 
+                                    pattern="[0-9]*"
                                     placeholder="0"
                                     anim=""
                                 ></Input>
@@ -244,12 +246,9 @@ export const DepositMiner = () => {
             <ButtonContainer>
                 {
                     (amount != "" && Number(amount) != 0) ? 
-                        Number(amount) <= miner_info.nfts.length ?
-                            <Links> <ActiveConfirm onClick={() => 
-                                DepositNftAction(miner_info.nfts, Number(amount))
-                            }>CONTINUE</ActiveConfirm> </Links> 
-                        : 
-                            <NonActiveConfirm>Not enough funds</NonActiveConfirm>
+                        Number(amount) <= 4 ?
+                            Number(amount) <= miner_info.nfts.length ? <Links> <ActiveConfirm onClick={() => DepositNftAction(miner_info.nfts, Number(amount))}>CONTINUE</ActiveConfirm> </Links> : <NonActiveConfirm>Not enough funds</NonActiveConfirm> 
+                        : <NonActiveConfirm>Max 4 transactions can be sent</NonActiveConfirm>
                     : 
                         <NonActiveConfirm>CONTINUE</NonActiveConfirm>
                 }
