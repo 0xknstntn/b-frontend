@@ -15,7 +15,7 @@ export interface Miner {
         nfts: Array<ItemMetadata>
 };
 
-const defaultState: Miner = { 
+export const defaultStateMiner: Miner = { 
         miner_address: '',
         miners_amount: 0,
         battery_amount: 0,
@@ -29,6 +29,6 @@ export const [useProtocolInfo] = createStore({
         miners_nft_count: 0,
 });
 
-export const [useBody] = createStore({body: ""});
+export const [useAction] = createStore({action: true});
 
-export const [useMinersInfo] = createStore(defaultState);
+export const [useMinersInfo] = createStore(defaultStateMiner);

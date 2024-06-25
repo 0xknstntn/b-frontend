@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import BytecoinLogo from '../../../assets/BytecoinLogo.png'
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useBody, useMinersInfo } from "../../../store/useProtocol";
+import { useNavigate } from "react-router-dom";
+import { useMinersInfo } from "../../../store/useProtocol";
 import { BytecoinProtocolAddress } from "../../../utils/const";
 import { SendTransactionRequest, useTonAddress, useTonConnectUI } from "@tonconnect/ui-react";
 

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Index } from './components';
 import { useEffect } from 'react';
 import { useTonAddress, useTonConnectUI, useTonWallet, TonConnectUiOptions, THEME } from '@tonconnect/ui-react';
-import { useMinersInfo, useProtocolInfo } from './store/useProtocol';
+import { defaultStateMiner, useMinersInfo, useProtocolInfo } from './store/useProtocol';
 
 const Main = styled.div`
 	max-width: 100%;
@@ -14,18 +14,18 @@ const api_url = 'https://b-api-theta.vercel.app/api/api/v1'
 function App() {
 	const userFriendlyAddress = useTonAddress();
 	const wallet = useTonWallet();
-	console.log("My address: ", userFriendlyAddress)
 	const [ miner_info, setMinerInfo ] = useMinersInfo();
 	const [ protocol_info, setProtocolInfo ] = useProtocolInfo();
 	const [ tonConnectUI, setOptions] = useTonConnectUI();
-
 	setOptions({
 		actionsConfiguration: {
-			notifications: []
+			notifications: [],
+			
 		},
 		uiPreferences: {
 			theme: THEME.LIGHT
 		}
+
 	})
 
 	useEffect(() => {
@@ -41,6 +41,8 @@ function App() {
 					balance: result_json.result.balance,
 					nfts: result_json.result.items
 				})
+			} else if (result_json.ok == "false") {
+				setMinerInfo(defaultStateMiner)
 			}
 
 			let result_miners_nft_count = await fetch(api_url + `/protocol/miners_nft_count`)
@@ -57,8 +59,6 @@ function App() {
 		}
 		main()
 	}, [wallet])
-	console.log(miner_info)
-	console.log(protocol_info)
 
 	return (
 		<Main>
