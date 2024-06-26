@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(
 );
 
 const manifestUrl =
-	"https://raw.githubusercontent.com/ton-community/tutorials/main/03-client/test/public/tonconnect-manifest.json";
+	"https://apricot-grubby-booby-751.mypinata.cloud/ipfs/QmaW14koeoQqeCuPNEALxq7tfWbnmKgjMRzrooQxo7FPXT";
 
 root.render(
 	<BrowserRouter>

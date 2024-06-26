@@ -4,6 +4,7 @@ import BytecoinLogo from '../../../assets/BytecoinLogo.png'
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { useMinersInfo } from "../../../store/useProtocol";
 
 const Container = styled.div`
     width: 90%;
@@ -68,6 +69,7 @@ const Links = styled(Link)`
 export const Withdraw = () => {
 
     const navigate = useNavigate();
+    const [ miner_info, setMinerInfo ] = useMinersInfo();
 
     useEffect(() => {
 		window.Telegram.WebApp.BackButton.show()
@@ -82,7 +84,7 @@ export const Withdraw = () => {
                     <Logo src={Laptop} />
                     <WithdrawNameContainer>
                         <WithdrawName>NFT ASIC</WithdrawName>
-                        <Amount>2 NFT</Amount>
+                        <Amount>{miner_info.miners_amount} NFT</Amount>
                     </WithdrawNameContainer>
                 </WithdrawContainer>
             </Links>
@@ -91,7 +93,7 @@ export const Withdraw = () => {
                     <Logo src={BytecoinLogo} />
                     <WithdrawNameContainer>
                         <WithdrawName>Bytecoin</WithdrawName>
-                        <Amount>0 BYTE</Amount>
+                        <Amount>{miner_info.bytecoins_amount} BYTE</Amount>
                     </WithdrawNameContainer>
                 </WithdrawContainer>
             </Links>
