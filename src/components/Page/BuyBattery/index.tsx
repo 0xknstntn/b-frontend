@@ -177,7 +177,7 @@ export const BuyBattery = () => {
             validUntil: Math.floor(Date.now() / 1000) + 300,
             messages: [
                 {
-                    address: "EQDgle7nXgxjFu-q6jLMW96z-FwtlXEQvSVv56XcdzmeASli",
+                    address: "kQAMlVxzk8FW7FqzP9nFFbxU3cUg-rbaaTSFvUuXMgphavg5",
                     amount: parsed_amount.toFixed(0),
                     //amount: "2000000000",
                     payload: "te6cckEBAQEADgAAGAAAAGQAAAAAAAAAAHSjJwk="
