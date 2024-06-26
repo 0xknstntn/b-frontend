@@ -15,13 +15,13 @@ const ConfirmText = styled.a`
     font-weight: 500;
     color: #fff;
     text-align: center;
-    margin-top: 80px;
+    margin-top: 30px;
 `
 
 const SuccessGIF = styled.img`
     width: 230px;
     height: 230px;
-    margin-top: 30px;
+    margin-top: 90px;
 `
 
 const ReturnButton = styled.button`
