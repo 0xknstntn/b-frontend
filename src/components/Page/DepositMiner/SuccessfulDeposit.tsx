@@ -30,7 +30,7 @@ const ReturnButton = styled.button`
     border-radius: 10px;
     background-color: #0098EA;
     color: #fff;
-    font-weight: 500;
+    font-weight: 400;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,7 +44,7 @@ const Links = styled(Link)`
     align-items: center;
     text-decoration: none;
     position: fixed;
-    bottom: 50px;
+    bottom: 20px;
 `
 
 

@@ -88,7 +88,9 @@ export const MinerBlock = () => {
                             } BYTE per 1 day</GreyText>
                         }
                     </AmountInfo>
-                    <BuyMiners src={BuyMoreMiners}/>
+                    <a href="https://testnet.getgems.io/collection/EQD9P8RuqjJmLVDwen_tKSgeW5VuNXndmRfgUdzRF8oIMW5y">
+                        <BuyMiners src={BuyMoreMiners}/>
+                    </a>
                 </ASICContainer>
                 <LineReward />
                 {miner_info.battery_amount == 0 && miner_info.miners_amount != 0 
