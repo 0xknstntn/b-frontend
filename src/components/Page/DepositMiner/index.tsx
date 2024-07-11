@@ -1,9 +1,16 @@
 import styled from "styled-components";
 import NFTASIC from '../../../assets/laptop.webp'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMinersInfo } from "../../../store/useProtocol";
 import { useTonConnectUI, SendTransactionRequest, useTonAddress } from "@tonconnect/ui-react";
+import { defaultSize, getInputSize } from "../../../store/useInputSize";
+
+
+export interface InputSize {
+    size: number;
+    width: number;
+}
 
 const Container = styled.div`
     width: 85%;
@@ -41,8 +48,6 @@ const AmountContainer = styled.div`
 `
 
 const Input = styled.input <{ anim: string }>`
-    width: 230px;
-    min-width: 1ch;
     height: 60px;
     font-size: 50px;
     font-weight: 400;
@@ -84,7 +89,7 @@ const WithdrawNameTokenError = styled.a`
     margin-left: 5px;
 `
 
-const InputContainer = styled.div`
+const InputContainer = styled.label`
     display: flex;
     align-items: center;
     margin-top: -5px;
@@ -200,6 +205,17 @@ export const DepositMiner = () => {
         })
     }
 
+    const refBlock = useRef<HTMLLabelElement>(null);
+
+    const [fontSize, setFontSize] = useState<InputSize>(defaultSize);
+
+    useLayoutEffect(() => {
+        if (refBlock.current) {
+            setFontSize(getInputSize(amount, refBlock.current));
+        }
+        console.log(fontSize)
+    }, [refBlock.current, amount]);
+
     return (
         <>
             <Container>
@@ -209,13 +225,12 @@ export const DepositMiner = () => {
                         <Name>Deposit NFT Miner</Name>
                     </NameContainer>
                     <AmountContainer>
-                        <InputContainer>
-
+                        <InputContainer ref={refBlock}>
                             { Number(amount) > miner_info.nfts.length || Number(amount) > 4 ? 
                                 <> 
                                 <Input
                                     value={amount}
-                                    style={{ width: `${amount.length}ch`, color: "#ef5b5b" }}
+                                    style={{ width: `${fontSize.width}px`, color: "#ef5b5b" }}
                                     onChange={(e) => setAmount(e.target.value)}
                                     inputMode="numeric" 
                                     pattern="[0-9]*"
@@ -228,7 +243,7 @@ export const DepositMiner = () => {
                                 <> 
                                 <Input
                                     value={amount}
-                                    style={{ width: `${amount.length}ch` }}
+                                    style={{ width: `${fontSize.width}px` }}
                                     onChange={(e) => setAmount(e.target.value)}
                                     inputMode="numeric" 
                                     pattern="[0-9]*"

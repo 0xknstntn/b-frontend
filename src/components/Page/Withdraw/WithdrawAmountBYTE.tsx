@@ -13,12 +13,6 @@ export interface InputSize {
     width: number;
 }
 
-interface InputProps {
-    value: string;
-    setValue: (value: string) => void;
-    inputSize: InputSize;
-}
-
 const Container = styled.div`
     width: 85%;
     display: flex;

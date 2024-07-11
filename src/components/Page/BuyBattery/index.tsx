@@ -1,10 +1,16 @@
 import styled from "styled-components";
 import TonLogo from '../../../assets/TonLogo.svg'
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMinersInfo } from "../../../store/useProtocol";
 import { useTonAddress, useTonConnectUI } from "@tonconnect/ui-react";
-import { BytecoinProtocolAddress } from "../../../utils/const";
+import { defaultSize, getInputSize } from "../../../store/useInputSize";
+
+
+export interface InputSize {
+    size: number;
+    width: number;
+}
 
 const Container = styled.div`
     width: 85%;
@@ -41,8 +47,6 @@ const AmountContainer = styled.div`
 `
 
 const Input = styled.input <{ anim: string }>`
-    width: 230px;
-    min-width: 1ch;
     height: 60px;
     font-size: 50px;
     font-weight: 400;
@@ -81,7 +85,7 @@ const WithdrawNameTokenMany = styled.a`
     margin-left: 5px;
 `
 
-const InputContainer = styled.div`
+const InputContainer = styled.label`
     display: flex;
     align-items: center;
     margin-top: -5px;
@@ -209,6 +213,17 @@ export const BuyBattery = () => {
         })
     }
 
+    const refBlock = useRef<HTMLLabelElement>(null);
+
+    const [fontSize, setFontSize] = useState<InputSize>(defaultSize);
+
+    useLayoutEffect(() => {
+        if (refBlock.current) {
+            setFontSize(getInputSize(amount, refBlock.current));
+        }
+        console.log(fontSize)
+    }, [refBlock.current, amount]);
+
     return (
         <>
             <Container>
@@ -217,12 +232,12 @@ export const BuyBattery = () => {
                         <Name>Buy Batteries</Name>
                     </NameContainer>
                     <AmountContainer>
-                        <InputContainer>
+                        <InputContainer ref={refBlock}>
                             { ((Number(amount) * 2 > (miner_info.balance / 10**9)) || ( miner_info.miners_amount == 0 )) && (Number(amount) != 0) ? 
                                 <> 
                                 <Input 
                                 value={amount} 
-                                style={{ maxWidth: `${amount.length}ch`, color: "#ef5b5b" }} 
+                                style={{ width: `${fontSize.width}px`, color: "#ef5b5b" }} 
                                 anim="shake 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) both" 
                                 onChange={HandleInputAmount} 
                                 inputMode='numeric' 
@@ -234,7 +249,7 @@ export const BuyBattery = () => {
                                 <> 
                                 <Input 
                                 value={amount} 
-                                style={{ maxWidth: `${amount.length}ch` }} 
+                                style={{ width: `${fontSize.width}px` }} 
                                 anim='' 
                                 onChange={HandleInputAmount} 
                                 inputMode='numeric' 

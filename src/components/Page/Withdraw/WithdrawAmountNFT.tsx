@@ -1,10 +1,17 @@
 import styled from "styled-components";
 import Laptop from '../../../assets/laptop.webp'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMinersInfo } from "../../../store/useProtocol";
 import { SendTransactionRequest, useTonAddress, useTonConnectUI } from "@tonconnect/ui-react";
 import { BytecoinProtocolAddress } from "../../../utils/const";
+import { defaultSize, getInputSize } from "../../../store/useInputSize";
+
+
+export interface InputSize {
+    size: number;
+    width: number;
+}
 
 const Container = styled.div`
     width: 85%;
@@ -42,8 +49,6 @@ const AmountContainer = styled.div`
 `
 
 const Input = styled.input <{ anim: string }>`
-    width: 230px;
-    min-width: 1ch;
     height: 60px;
     font-size: 50px;
     font-weight: 400;
@@ -84,7 +89,7 @@ const WithdrawNameTokenError = styled.a`
 `
 
 
-const InputContainer = styled.div`
+const InputContainer = styled.label`
     display: flex;
     align-items: center;
     margin-top: -5px;
@@ -194,6 +199,17 @@ export const WithdrawAmountNFT = () => {
         })
     }
 
+    const refBlock = useRef<HTMLLabelElement>(null);
+
+    const [fontSize, setFontSize] = useState<InputSize>(defaultSize);
+
+    useLayoutEffect(() => {
+        if (refBlock.current) {
+            setFontSize(getInputSize(amount, refBlock.current));
+        }
+        console.log(fontSize)
+    }, [refBlock.current, amount]);
+
     return (
         <>
             <Container>
@@ -203,12 +219,12 @@ export const WithdrawAmountNFT = () => {
                         <Name>Send to Your wallet</Name>
                     </NameContainer>
                     <AmountContainer>
-                        <InputContainer>
+                        <InputContainer ref={refBlock}>
                             { Number(amount) > miner_info.miners_amount ?
                                 <> 
                                     <Input 
                                     value={amount} 
-                                    style={{ maxWidth: `${amount.length}ch`, color: "#ef5b5b" }} 
+                                    style={{ width: `${fontSize.width}px`, color: "#ef5b5b" }} 
                                     onChange={(e) => setAmount(e.target.value)} 
                                     inputMode='numeric' 
                                     pattern="[0-9]*" 
@@ -219,7 +235,7 @@ export const WithdrawAmountNFT = () => {
                                 </>
                             : 
                                 <> 
-                                    <Input value={amount} style={{ maxWidth: `${amount.length}ch` }} onChange={(e) => setAmount(e.target.value)} inputMode='numeric' pattern="[0-9]*" placeholder="0" anim=""></Input>
+                                    <Input value={amount} style={{ width: `${fontSize.width}px` }} onChange={(e) => setAmount(e.target.value)} inputMode='numeric' pattern="[0-9]*" placeholder="0" anim=""></Input>
                                     <WithdrawNameToken>NFT</WithdrawNameToken> 
                                 </>
                         }
