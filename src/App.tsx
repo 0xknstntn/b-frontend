@@ -6,7 +6,7 @@ import { defaultStateMiner, useMinersInfo, useProtocolInfo } from './store/usePr
 
 const Main = styled.div`
 	max-width: 100%;
-	height: 100vh;
+	height: var(--tg-viewport-stable-height);
 `
 
 const api_url = 'https://b-api-theta.vercel.app/api/api/v1'
