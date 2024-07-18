@@ -9,6 +9,7 @@ import { formatCash } from "../../../utils/utils";
 
 const Container = styled.div`
     width: 85%;
+    height: 100vh;
     margin-top: 30px;
     display: flex;
     flex-direction: column;

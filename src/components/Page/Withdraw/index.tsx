@@ -8,6 +8,7 @@ import { useMinersInfo } from "../../../store/useProtocol";
 
 const Container = styled.div`
     width: 90%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;

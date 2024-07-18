@@ -14,6 +14,7 @@ export interface InputSize {
 
 const Container = styled.div`
     width: 85%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
