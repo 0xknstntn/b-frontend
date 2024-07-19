@@ -105,7 +105,7 @@ const ButtonContainer = styled.div`
     display: flex;
     justify-content: center;
     position: fixed;
-    bottom: 20px;
+    bottom: 30px;
 `
 
 const NonActiveConfirm = styled.button`

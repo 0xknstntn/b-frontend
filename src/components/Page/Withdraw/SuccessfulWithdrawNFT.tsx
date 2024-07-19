@@ -44,7 +44,7 @@ const Links = styled(Link)`
     align-items: center;
     text-decoration: none;
     position: fixed;
-    bottom: 20px;
+    bottom: 30px;
 `
 
 
