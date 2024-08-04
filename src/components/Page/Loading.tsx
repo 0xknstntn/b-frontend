@@ -36,18 +36,8 @@ export const LoadingPage = () => {
     return(
         <>
         <Container>
-            <Logo loading="lazy" src={ByteLogo}/>
+            <Logo loading="lazy" src={require(ByteLogo)}/>
         </Container>
-            <div style={{display: "none"}}>
-                <img loading="lazy" src={BuyBattery}></img>
-                <img loading="lazy" src={buymoreminers}></img>
-                <img loading="lazy" src={ByteLogopng}></img>
-                <img loading="lazy" src={depositminer}></img>
-                <img loading="lazy" src={laptop}></img>
-                <img loading="lazy" src={Succes}></img>
-                <img loading="lazy" src={tonlogo}></img>
-                <img loading="lazy" src={withdraw}></img>
-            </div>
         </>
     )
 }
