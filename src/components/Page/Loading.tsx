@@ -15,11 +15,11 @@ const Logo = styled.img`
     height: 75px;
     border-radius: 50%;
     @keyframes glowing {
-      0% { background-color: rgb(7, 150, 214); box-shadow: 0 0 5px rgb(7, 150, 214); }
+      0% { background-color: rgb(7, 150, 214); box-shadow: 0 0 10px rgb(7, 150, 214); }
       50% { background-color: rgb(7, 150, 234); box-shadow: 0 0 25px rgb(7, 150, 234); }
-      100% { background-color: rgb(7, 150, 214); box-shadow: 0 0 5px rgb(7, 150, 214) }
+      100% { background-color: rgb(7, 150, 214); box-shadow: 0 0 10px rgb(7, 150, 214) }
       }
-      animation: glowing 1750ms infinite;
+      animation: glowing 2000ms infinite;
       margin-bottom: 40px;
 `
 
