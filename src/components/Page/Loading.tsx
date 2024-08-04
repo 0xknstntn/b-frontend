@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ByteLogo from '../../assets/BytecoinLogo.webp'
+import ByteLogo from '../../assets/BytecoinLogo.png'
 import BuyBattery from '../../assets/BuyBattery.webp'
 import buymoreminers from '../../assets/BuyMoreMiners.webp'
 import ByteLogopng from '../../assets/BytecoinLogo.png'
@@ -34,18 +34,20 @@ const Logo = styled.img`
 
 export const LoadingPage = () => {
     return(
+        <>
         <Container>
             <Logo loading="lazy" src={ByteLogo}/>
-            <div style={{display: "none"}}>
-                <img src={BuyBattery}></img>
-                <img src={buymoreminers}></img>
-                <img src={ByteLogopng}></img>
-                <img src={depositminer}></img>
-                <img src={laptop}></img>
-                <img src={Succes}></img>
-                <img src={tonlogo}></img>
-                <img src={withdraw}></img>
-            </div>
         </Container>
+            <div style={{display: "none"}}>
+                <img loading="lazy" src={BuyBattery}></img>
+                <img loading="lazy" src={buymoreminers}></img>
+                <img loading="lazy" src={ByteLogopng}></img>
+                <img loading="lazy" src={depositminer}></img>
+                <img loading="lazy" src={laptop}></img>
+                <img loading="lazy" src={Succes}></img>
+                <img loading="lazy" src={tonlogo}></img>
+                <img loading="lazy" src={withdraw}></img>
+            </div>
+        </>
     )
 }
