@@ -24,7 +24,7 @@ function App() {
 		let result_json = await users_result.json()
 
 		let result = result_json.result
-		console.log(result)
+		console.log(tonConnectUI.connected)
 
 		if (result_json.ok == "true") {
 			setMinerInfo({
@@ -34,7 +34,7 @@ function App() {
 				balance: result_json.result.balance == undefined ? 0 : result_json.result.balance,
 				nfts: result_json.result.nft_list == undefined ? [] : result_json.result.nft_list
 			})
-		} else if (result_json.ok == "false" && !wallet) {
+		} else if (tonConnectUI.connected == false) {
 			setMinerInfo({
 				miners_amount: 0,
 				battery_amount: 0,
@@ -79,7 +79,7 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		var t = setInterval(main, 15000);
+		var t = setInterval(main, 10000);
 	}, [])
 
 	return (
