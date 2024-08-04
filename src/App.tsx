@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { Index } from './components';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTonAddress, useTonConnectUI, useTonWallet, TonConnectUiOptions, THEME } from '@tonconnect/ui-react';
 import { defaultStateMiner, useMinersInfo, useProtocolInfo } from './store/useProtocol';
+import { LoadingPage } from './components/Page/Loading';
 
 const Main = styled.div`
 	max-width: 100%;
@@ -14,13 +15,14 @@ const api_url = 'https://b-api-theta.vercel.app/api/api/v1'
 function App() {
 	const userFriendlyAddress = useTonAddress();
 	const wallet = useTonWallet();
-	const [ miner_info, setMinerInfo ] = useMinersInfo();
-	const [ protocol_info, setProtocolInfo ] = useProtocolInfo();
-	const [ tonConnectUI, setOptions] = useTonConnectUI();
+	const [miner_info, setMinerInfo] = useMinersInfo();
+	const [protocol_info, setProtocolInfo] = useProtocolInfo();
+	const [tonConnectUI, setOptions] = useTonConnectUI();
+	const [isLoading, setIsLoading] = useState(true);
 	setOptions({
 		actionsConfiguration: {
 			notifications: [],
-			
+
 		},
 		uiPreferences: {
 			theme: THEME.LIGHT
@@ -73,9 +75,20 @@ function App() {
 		main()
 	}, [wallet])
 
+	useEffect(() => {
+		setTimeout(() => {
+			setIsLoading(false);
+		}, 2000);
+	}, []);
+
 	return (
 		<Main>
-			<Index />
+			{isLoading ? (
+				<LoadingPage />
+			) : (
+				<Index />
+      )}
+			
 		</Main>
 	);
 }
