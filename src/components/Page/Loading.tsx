@@ -27,7 +27,7 @@ const Logo = styled.img`
 export const LoadingPage = () => {
     return(
         <Container>
-            <Logo src={ByteLogo}/>
+            <Logo loading="lazy" src={ByteLogo}/>
         </Container>
     )
 }
