@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useMinersInfo } from "../../../store/useProtocol";
+import { formatCash } from "../../../utils/utils";
 
 const Container = styled.div`
     width: 90%;
@@ -93,7 +94,7 @@ export const Withdraw = () => {
                     <Logo src={BytecoinLogo} />
                     <WithdrawNameContainer>
                         <WithdrawName>Bytecoin</WithdrawName>
-                        <Amount>{miner_info.bytecoins_amount} BYTE</Amount>
+                        <Amount>{formatCash(miner_info.bytecoins_amount)} BYTE</Amount>
                     </WithdrawNameContainer>
                 </WithdrawContainer>
             </Links>

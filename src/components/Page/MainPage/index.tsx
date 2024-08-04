@@ -2,7 +2,6 @@ import styled from "styled-components";
 import BytecoinLogo from '../../../assets/BytecoinLogo.png'
 import { NavigationBlock } from "./NavigationBlock";
 import { MinerBlock } from "./MinerBlock";
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useMinersInfo, useProtocolInfo } from "../../../store/useProtocol";
 import { formatCash } from "../../../utils/utils";
@@ -60,6 +59,8 @@ export const MainPage = () => {
 
     const [miner_info, setMinerInfo] = useMinersInfo();
     const [protocol_info, setProtocolInfo] = useProtocolInfo();
+    
+    let mined_value = ((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount
 
     return (
         <>
@@ -72,9 +73,7 @@ export const MainPage = () => {
                             <> <AmountDescription> 0 Mined today • {miner_info.miners_amount} NFT ASIC</AmountDescription> </> :
                             <AmountDescription>
                                 {
-                                    isNaN((((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount))
-                                        ? 0 :
-                                        formatCash((((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount))
+                                    isNaN(mined_value) ? 0 : formatCash(mined_value)
                                 } Mined today • {miner_info.miners_amount} NFT ASIC
                             </AmountDescription>
                         }

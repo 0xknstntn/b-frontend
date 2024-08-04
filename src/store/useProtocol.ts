@@ -7,7 +7,6 @@ type ItemMetadata = {
 }
 
 export interface Miner {
-        miner_address: string,
         miners_amount: number,
         battery_amount: number,
         bytecoins_amount: number,
@@ -16,7 +15,6 @@ export interface Miner {
 };
 
 export const defaultStateMiner: Miner = { 
-        miner_address: '',
         miners_amount: 0,
         battery_amount: 0,
         bytecoins_amount: 0,

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMinersInfo } from "../../../store/useProtocol";
 import { SendTransactionRequest, useTonAddress, useTonConnectUI } from "@tonconnect/ui-react";
-import { BytecoinProtocolAddress } from "../../../utils/const";
+import { BytecoinProtocolAddress, BytecoinApiURL } from "../../../utils/const";
 import { defaultSize, getInputSize } from "../../../store/useInputSize";
 
 
@@ -56,7 +56,7 @@ const Input = styled.input <{ anim: string }>`
     color: #fff;
     background: transparent;
     padding: 0;
-    animation: ${(props: { anim: any; }) => props .anim};
+    animation: ${(props: { anim: any; }) => props.anim};
     @keyframes shake {
         10%, 90% {
             transform: translateX(-0.5px);
@@ -147,22 +147,20 @@ const Links = styled.div`
     text-decoration: none;
 `
 
-const api_url = 'https://b-api-theta.vercel.app/api/api/v1'
-
 export const WithdrawAmountNFT = () => {
     const userFriendlyAddress = useTonAddress();
-    const [ amount, setAmount ] = useState('');
+    const [amount, setAmount] = useState('');
     const navigate = useNavigate();
-    const [ miner_info, setMinerInfo ] = useMinersInfo();
-    const [ tonConnectUI, setOptions] = useTonConnectUI();
+    const [miner_info, setMinerInfo] = useMinersInfo();
+    const [tonConnectUI, setOptions] = useTonConnectUI();
 
     useEffect(() => {
-		window.Telegram.WebApp.BackButton.show()
+        window.Telegram.WebApp.BackButton.show()
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
-	}, [])
+    }, [])
 
     const WithdrawalNFT = (amount: number) => {
-        let parsed_amount = (0.12 * 10**9)
+        let parsed_amount = (0.12 * 10 ** 9)
         let myTransaction: SendTransactionRequest = {
             validUntil: Math.floor(Date.now() / 1000) + 600,
             messages: []
@@ -183,20 +181,6 @@ export const WithdrawAmountNFT = () => {
         let result = tonConnectUI.sendTransaction(tx);
         result.then((res) => {
             navigate("/SuccessWithdrawNFT");
-            setTimeout(async function() {
-                let result = await fetch(api_url + `/miners?address=${userFriendlyAddress}`)
-                let result_json = await result.json()
-                if (result_json.ok == "true") {
-                    setMinerInfo({
-                        miner_address: userFriendlyAddress,
-                        miners_amount: result_json.result.miners_amount,
-                        battery_amount: result_json.result.battery_amount,
-                        bytecoins_amount: result_json.result.bytecoins_amount,
-                        balance: result_json.result.balance,
-                        nfts: result_json.result.items
-                    })
-                }
-            }, 10000);
         })
     }
 
@@ -208,7 +192,7 @@ export const WithdrawAmountNFT = () => {
         if (refBlock.current) {
             setFontSize(getInputSize(amount, refBlock.current));
         }
-        console.log(fontSize)
+        
     }, [refBlock.current, amount]);
 
     return (
@@ -221,39 +205,39 @@ export const WithdrawAmountNFT = () => {
                     </NameContainer>
                     <AmountContainer>
                         <InputContainer ref={refBlock}>
-                            { Number(amount) > miner_info.miners_amount ?
-                                <> 
-                                    <Input 
-                                    value={amount} 
-                                    style={{ width: `${fontSize.width}px`, color: "#ef5b5b" }} 
-                                    onChange={(e) => setAmount(e.target.value)} 
-                                    inputMode='numeric' 
-                                    pattern="[0-9]*" 
-                                    placeholder="0"
-                                    anim="shake 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) both" 
-                                ></Input>
-                                    <WithdrawNameTokenError>NFT</WithdrawNameTokenError> 
+                            {Number(amount) > miner_info.miners_amount ?
+                                <>
+                                    <Input
+                                        value={amount}
+                                        style={{ width: `${fontSize.width}px`, color: "#ef5b5b" }}
+                                        onChange={(e) => setAmount(e.target.value)}
+                                        inputMode='numeric'
+                                        pattern="[0-9]*"
+                                        placeholder="0"
+                                        anim="shake 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) both"
+                                    ></Input>
+                                    <WithdrawNameTokenError>NFT</WithdrawNameTokenError>
                                 </>
-                            : 
-                                <> 
+                                :
+                                <>
                                     <Input value={amount} style={{ width: `${fontSize.width}px` }} onChange={(e) => setAmount(e.target.value)} inputMode='numeric' pattern="[0-9]*" placeholder="0" anim=""></Input>
-                                    <WithdrawNameToken>NFT</WithdrawNameToken> 
+                                    <WithdrawNameToken>NFT</WithdrawNameToken>
                                 </>
-                        }
+                            }
                         </InputContainer>
                         <AmountOnBalance>{miner_info.miners_amount} NFT on balance</AmountOnBalance>
                     </AmountContainer>
                 </div>
             </Container>
             <ButtonContainer>
-                { 
+                {
                     amount != "" && Number(amount) != 0 ?
                         Number(amount) <= 4 ?
-                            Number(amount) <= miner_info.miners_amount ? 
-                                <Links><ActiveConfirm onClick={() => WithdrawalNFTAction(Number(amount))}>CONTINUE</ActiveConfirm></Links> 
-                            : <NonActiveConfirm>Not enough funds</NonActiveConfirm> 
-                        : <NonActiveConfirm>Max 4 transactions can be sent</NonActiveConfirm>
-                    : <NonActiveConfirm>CONTINUE</NonActiveConfirm>
+                            Number(amount) <= miner_info.miners_amount ?
+                                <Links><ActiveConfirm onClick={() => WithdrawalNFTAction(Number(amount))}>CONTINUE</ActiveConfirm></Links>
+                                : <NonActiveConfirm>Not enough funds</NonActiveConfirm>
+                            : <NonActiveConfirm>Max 4 transactions can be sent</NonActiveConfirm>
+                        : <NonActiveConfirm>CONTINUE</NonActiveConfirm>
                 }
             </ButtonContainer>
         </>

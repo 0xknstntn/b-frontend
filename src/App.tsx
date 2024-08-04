@@ -1,16 +1,15 @@
 import styled from 'styled-components';
 import { Index } from './components';
 import { useEffect, useState } from 'react';
-import { useTonAddress, useTonConnectUI, useTonWallet, TonConnectUiOptions, THEME } from '@tonconnect/ui-react';
-import { defaultStateMiner, useMinersInfo, useProtocolInfo } from './store/useProtocol';
+import { useTonAddress, useTonConnectUI, useTonWallet, TonConnectUiOptions, THEME, useTonConnectModal } from '@tonconnect/ui-react';
+import { useMinersInfo, useProtocolInfo } from './store/useProtocol';
 import { LoadingPage } from './components/Page/Loading';
+import { BytecoinApiURL } from './utils/const';
 
 const Main = styled.div`
 	max-width: 100%;
 	height: var(--tg-viewport-stable-height);
 `
-
-const api_url = 'https://b-api-theta.vercel.app/api/api/v1'
 
 function App() {
 	const userFriendlyAddress = useTonAddress();
@@ -19,6 +18,45 @@ function App() {
 	const [protocol_info, setProtocolInfo] = useProtocolInfo();
 	const [tonConnectUI, setOptions] = useTonConnectUI();
 	const [isLoading, setIsLoading] = useState(true);
+
+	async function main() {
+		let users_result = await fetch(BytecoinApiURL + `/users/sync?address=${userFriendlyAddress}`)
+		let result_json = await users_result.json()
+
+		let result = result_json.result
+		console.log(result)
+
+		if (result_json.ok == "true") {
+			setMinerInfo({
+				miners_amount: result.miner_info.miners_amount == undefined ? 0 : result.miner_info.miners_amount,
+				battery_amount: result.miner_info.battery_amount == undefined ? 0 : result.miner_info.battery_amount,
+				bytecoins_amount: result.miner_info.bytecoins_amount == undefined ? 0 : result.miner_info.bytecoins_amount,
+				balance: result_json.result.balance == undefined ? 0 : result_json.result.balance,
+				nfts: result_json.result.nft_list == undefined ? [] : result_json.result.nft_list
+			})
+		} else if (result_json.ok == "false" && !wallet) {
+			setMinerInfo({
+				miners_amount: 0,
+				battery_amount: 0,
+				bytecoins_amount: 0,
+				balance: 0,
+				nfts: []
+			})
+		}
+
+		let protocol_info_result = await fetch(BytecoinApiURL + `/protocol/info`)
+		let protocol_info_result_json = await protocol_info_result.json()
+		let result_parse = protocol_info_result_json.result
+
+		if (protocol_info_result_json.ok == "true") {
+			setProtocolInfo({
+				epoch: result_parse.epoch_number,
+				miners_nft_count: result_parse.miners_nft_count
+			})
+		}
+		console.log('Read info')
+	}
+
 	setOptions({
 		actionsConfiguration: {
 			notifications: [],
@@ -31,47 +69,6 @@ function App() {
 	})
 
 	useEffect(() => {
-		async function main() {
-			let result = await fetch(api_url + `/miners?address=${userFriendlyAddress}`)
-			let result_json = await result.json()
-
-			let result_nft = await fetch(api_url + `/nft?address=${userFriendlyAddress}`)
-			let result_nft_json = await result_nft.json()
-
-			if (result_json.ok == "true") {
-				setMinerInfo({
-					miner_address: userFriendlyAddress,
-					miners_amount: result_json.result.miners_amount,
-					battery_amount: result_json.result.battery_amount,
-					bytecoins_amount: result_json.result.bytecoins_amount,
-					balance: result_json.result.balance,
-					nfts: result_nft_json.result.items
-				})
-			} else if (result_json.ok == "false" && result_nft_json.ok == "true") {
-				setMinerInfo({
-					miner_address: userFriendlyAddress,
-					miners_amount: 0,
-					battery_amount: 0,
-					bytecoins_amount: 0,
-					balance: 0,
-					nfts: result_nft_json.result.items
-				})
-			} else if (result_json.ok == "false" && result_nft_json.ok == "false") {
-				setMinerInfo(defaultStateMiner)
-			}
-
-			let result_miners_nft_count = await fetch(api_url + `/protocol/miners_nft_count`)
-			let result_miners_nft_count_json = await result_miners_nft_count.json()
-
-			let result_epoch = await fetch(api_url + `/protocol/epoch`)
-			let result_epoch_json = await result_epoch.json()
-			if (result_epoch_json.ok == "true" && result_miners_nft_count_json.ok == "true") {
-				setProtocolInfo({
-					epoch: Number(result_epoch_json.result.epoch),
-					miners_nft_count: Number(result_miners_nft_count_json.result.miners_nft_count),
-				})
-			}
-		}
 		main()
 	}, [wallet])
 
@@ -80,6 +77,10 @@ function App() {
 			setIsLoading(false);
 		}, 3000);
 	}, []);
+
+	useEffect(() => {
+		var t = setInterval(main, 15000);
+	}, [])
 
 	return (
 		<Main>
