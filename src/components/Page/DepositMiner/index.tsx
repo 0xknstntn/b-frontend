@@ -48,6 +48,7 @@ const AmountContainer = styled.div`
 `
 
 const Input = styled.input <{ anim: string }>`
+    min-width: 32px;
     height: 60px;
     font-size: 50px;
     font-weight: 400;
