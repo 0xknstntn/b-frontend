@@ -215,7 +215,7 @@ export const WithdrawAmountNFT = () => {
             <Container>
                 <div style={{ width: "100%" }}>
                     <NameContainer>
-                        <Logo src={Laptop} />
+                        <Logo loading="lazy" src={Laptop} />
                         <Name>Send to Your wallet</Name>
                     </NameContainer>
                     <AmountContainer>

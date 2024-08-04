@@ -77,7 +77,7 @@ export const SuccessWithdrawBYTE = () => {
     return(
         <Contrainer>
             <ConfirmText>Withdrawal Sent!</ConfirmText>
-            <SuccessGIF src={Success}/>
+            <SuccessGIF loading="lazy" src={Success}/>
             <FarmContainer>
                 <FarmText>Farm on DeDust.io with 🔥 APR</FarmText>
             </FarmContainer>

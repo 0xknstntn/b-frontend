@@ -221,7 +221,7 @@ export const DepositMiner = () => {
             <Container>
                 <div style={{ width: "100%" }}>
                     <NameContainer>
-                        <Logo src={NFTASIC} />
+                        <Logo loading="lazy" src={NFTASIC} />
                         <Name>Deposit NFT Miner</Name>
                     </NameContainer>
                     <AmountContainer>

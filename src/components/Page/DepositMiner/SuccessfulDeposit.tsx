@@ -60,7 +60,7 @@ export const SuccessDeposit = () => {
     return(
         <Contrainer>
             <ConfirmText>Deposit Sent!</ConfirmText>
-            <SuccessGIF src={Success}/>
+            <SuccessGIF loading="lazy" src={Success}/>
             <Links to="/">
                 <ReturnButton>Return to menu</ReturnButton>
             </Links>

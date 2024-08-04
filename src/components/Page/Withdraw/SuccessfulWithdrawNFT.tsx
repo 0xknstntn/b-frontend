@@ -60,7 +60,7 @@ export const SuccessWithdrawNFT = () => {
     return(
         <Contrainer>
             <ConfirmText>Withdrawal Sent!</ConfirmText>
-            <SuccessGIF src={Success}/>
+            <SuccessGIF loading="lazy" src={Success}/>
             <Links to="/">
                 <ReturnButton>Return to menu</ReturnButton>
             </Links>

@@ -79,7 +79,7 @@ export const MainPage = () => {
                             </AmountDescription>
                         }
                     </MainInfoBlock>
-                    <Logo loading="lazy" width="75px" height="75px" src={BytecoinLogo} />
+                    <Logo loading="lazy" src={BytecoinLogo} />
                 </MainInfo>
                 <NavigationBlock />
             </Container>

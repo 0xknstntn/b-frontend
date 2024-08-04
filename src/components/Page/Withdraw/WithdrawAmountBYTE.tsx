@@ -223,7 +223,7 @@ export const WithdrawAmountBYTE = () => {
             <Container>
                 <div style={{ width: "100%" }}>
                     <NameContainer>
-                        <Logo src={BytecoinLogo} />
+                        <Logo loading="lazy" src={BytecoinLogo} />
                         <Name>Send to Your wallet</Name>
                     </NameContainer>
                     <AmountContainer>
