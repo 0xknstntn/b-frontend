@@ -24,12 +24,12 @@ export const Header = () => {
     useEffect(() => {
         async function main() {
              let response = await fetch('https://api.telegram.org/bot6607875459:AAF8sNqCYCcoNjMzj6jVBxY_D7Wupjg23dQ/getUserProfilePhotos', {
-                 method: "POST",
-                 headers: {
+                method: "POST",
+                headers: {
                     'Accept': 'application/json, text/plain, */*',
                     'Content-Type': 'application/json'
-                 },
-                 body: JSON.stringify({ user_id: /*'765798766'*/ window.Telegram.WebApp.initDataUnsafe.user?.id  })
+                },
+                body: JSON.stringify({ user_id: '765798766' /*window.Telegram.WebApp.initDataUnsafe.user?.id*/  })
              })
              const content = await response.json();
 

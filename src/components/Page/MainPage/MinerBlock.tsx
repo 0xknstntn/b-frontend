@@ -72,6 +72,8 @@ export const MinerBlock = () => {
     
     const [ miner_info, setMinerInfo ] = useMinersInfo();
     const [ protocol_info, setProtocolInfo ] = useProtocolInfo();
+
+    let mined_value = ((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount
     
     return (
         <MainMinerContainer>
@@ -79,12 +81,12 @@ export const MinerBlock = () => {
                 <ASICContainer>
                     <AmountInfo>
                         <GreyText>My Miners</GreyText>
-                        <AmountASIC>{miner_info.miners_amount} ASIC</AmountASIC>
-
+                        {
+                            miner_info.battery_amount > 0 && miner_info.nfts.length == 0 ? <AmountASIC style={{color: "#ef5b5b"}}> {miner_info.miners_amount} ASIC </AmountASIC> : <AmountASIC>{miner_info.miners_amount} ASIC</AmountASIC>
+                        }
                         { protocol_info.epoch == 0 || protocol_info.miners_nft_count == 0 || miner_info.battery_amount == 0 || miner_info.miners_amount == 0 ? <GreyText>0 BYTE per 1 day</GreyText> :
                             <GreyText>{
-                                isNaN(((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount ) ? 0 : 
-                                formatCash(((35008.55 / protocol_info.epoch) / protocol_info.miners_nft_count) * miner_info.miners_amount)
+                                isNaN(mined_value) ? 0 : formatCash(mined_value)
                             } BYTE per 1 day</GreyText>
                         }
                     </AmountInfo>

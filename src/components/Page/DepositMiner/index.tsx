@@ -153,7 +153,7 @@ type ItemMetadata = {
     owner: string
 }
 
-const api_url = 'https://b-api-theta.vercel.app/api/api/v1'
+const BytecoinApiURL = 'https://b-api-theta.vercel.app/api/api/v1'
 
 export const DepositMiner = () => {
     const userFriendlyAddress = useTonAddress();
@@ -189,20 +189,6 @@ export const DepositMiner = () => {
         let result = tonConnectUI.sendTransaction(tx);
         result.then((res) => {
             navigate("/SuccessDeposit");
-            setTimeout(async function() {
-                let result = await fetch(api_url + `/miners?address=${userFriendlyAddress}`)
-                let result_json = await result.json()
-                if (result_json.ok == "true") {
-                    setMinerInfo({
-                        miner_address: userFriendlyAddress,
-                        miners_amount: result_json.result.miners_amount,
-                        battery_amount: result_json.result.battery_amount,
-                        bytecoins_amount: result_json.result.bytecoins_amount,
-                        balance: result_json.result.balance,
-                        nfts: result_json.result.items
-                    })
-                }
-            }, 10000);
         })
     }
 
@@ -214,7 +200,7 @@ export const DepositMiner = () => {
         if (refBlock.current) {
             setFontSize(getInputSize(amount, refBlock.current));
         }
-        console.log(fontSize)
+        
     }, [refBlock.current, amount]);
 
     return (
@@ -264,7 +250,7 @@ export const DepositMiner = () => {
                     (amount != "" && Number(amount) != 0) ? 
                         Number(amount) <= 4 ?
                             Number(amount) <= miner_info.nfts.length ? <Links> <ActiveConfirm onClick={() => DepositNftAction(miner_info.nfts, Number(amount))}>CONTINUE</ActiveConfirm> </Links> : <NonActiveConfirm>Not enough funds</NonActiveConfirm> 
-                        : <NonActiveConfirm>Max 4 transactions can be sent</NonActiveConfirm>
+                        : <NonActiveConfirm>No more than 4 NFTs per attempt</NonActiveConfirm>
                     : 
                         <NonActiveConfirm>CONTINUE</NonActiveConfirm>
                 }
