@@ -13,7 +13,7 @@ export const getInputSize = (value: string, parent: HTMLLabelElement) => {
     }
 
     return {
-        width: Math.max(Math.round(width) + 9, value.length * 9, 30),
+        width: Math.max(Math.round(width) + 0, value.length * 9, 30),
         size: size
     };
 };
