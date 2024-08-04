@@ -89,7 +89,7 @@ export const MinerBlock = () => {
                         }
                     </AmountInfo>
                     <a href="https://testnet.getgems.io/collection/EQD9P8RuqjJmLVDwen_tKSgeW5VuNXndmRfgUdzRF8oIMW5y">
-                        <BuyMiners src={BuyMoreMiners}/>
+                        <BuyMiners loading="lazy" src={BuyMoreMiners}/>
                     </a>
                 </ASICContainer>
                 <LineReward />

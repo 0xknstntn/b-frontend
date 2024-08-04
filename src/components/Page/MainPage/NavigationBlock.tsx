@@ -46,19 +46,19 @@ export const NavigationBlock = () => {
         <Container>
             <LinkContainer>
                 <Links to="/depositminer">
-                    <Logo src={DepositMiner} />
+                    <Logo loading="lazy" src={DepositMiner} />
                     <LinkText>Deposit Miner</LinkText>
                 </Links>
             </LinkContainer>
             <LinkContainer>
                 <Links to="/buybattery">
-                    <Logo src={BuyBattery} />
+                    <Logo loading="lazy" src={BuyBattery} />
                     <LinkText>Buy battery</LinkText>
                 </Links>
             </LinkContainer>
             <LinkContainer>
                 <Links to="/withdraw">
-                    <Logo src={Withdraw} />
+                    <Logo loading="lazy" src={Withdraw} />
                     <LinkText>Withdraw</LinkText>
                 </Links>
             </LinkContainer>
