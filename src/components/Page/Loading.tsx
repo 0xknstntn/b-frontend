@@ -36,7 +36,7 @@ export const LoadingPage = () => {
     return(
         <>
         <Container>
-            <Logo loading="lazy" src={require(ByteLogo)}/>
+            <Logo loading="lazy" src={ByteLogo}/>
         </Container>
         </>
     )
