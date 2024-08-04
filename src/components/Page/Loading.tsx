@@ -20,6 +20,7 @@ const Logo = styled.img`
       100% { background-color: rgb(7, 150, 214); box-shadow: 0 0 5px rgb(7, 150, 214) }
       }
       animation: glowing 1300ms infinite;
+      margin-bottom: 40px;
 `
 
 
