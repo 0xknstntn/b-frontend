@@ -1,5 +1,13 @@
 import styled from "styled-components";
-import ByteLogo from '../../assets/BytecoinLogo.png'
+import ByteLogo from '../../assets/BytecoinLogo.webp'
+import BuyBattery from '../../assets/BuyBattery.webp'
+import buymoreminers from '../../assets/BuyMoreMiners.webp'
+import ByteLogopng from '../../assets/BytecoinLogo.png'
+import depositminer from '../../assets/DepositMiner.webp'
+import laptop from '../../assets/laptop.webp'
+import Succes from '../../assets/SuccessWithdraw.gif'
+import tonlogo from '../../assets/TonLogo.svg'
+import withdraw from '../../assets/Withdraw.webp'
 
 const Container = styled.div`
     width: 100%;
@@ -28,6 +36,16 @@ export const LoadingPage = () => {
     return(
         <Container>
             <Logo loading="lazy" src={ByteLogo}/>
+            <div style={{display: "none"}}>
+                <img src={BuyBattery}></img>
+                <img src={buymoreminers}></img>
+                <img src={ByteLogopng}></img>
+                <img src={depositminer}></img>
+                <img src={laptop}></img>
+                <img src={Succes}></img>
+                <img src={tonlogo}></img>
+                <img src={withdraw}></img>
+            </div>
         </Container>
     )
 }
