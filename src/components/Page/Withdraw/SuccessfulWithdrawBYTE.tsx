@@ -79,7 +79,7 @@ export const SuccessWithdrawBYTE = () => {
             <ConfirmText>Withdrawal Sent!</ConfirmText>
             <SuccessGIF loading="lazy" src={Success}/>
             <FarmContainer>
-                <FarmText>Farm on DeDust.io with 🔥 APR</FarmText>
+                <FarmText>Farm on Ston.fi with 🔥 APR</FarmText>
             </FarmContainer>
             <Links to="/">
                 <ReturnButton>Return to menu</ReturnButton>
