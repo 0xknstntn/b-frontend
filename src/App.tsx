@@ -20,11 +20,16 @@ function App() {
 	const [isLoading, setIsLoading] = useState(true);
 
 	async function main() {
-		let users_result = await fetch(BytecoinApiURL + `/users/sync?address=${userFriendlyAddress}`)
+		if (userFriendlyAddress != "") {
+			localStorage.setItem("bytecoin-ton-address", userFriendlyAddress)
+		}
+
+		console.log('ITEM: ', localStorage.getItem("bytecoin-ton-address"))
+
+		let users_result = await fetch(BytecoinApiURL + `/users/sync?address=${localStorage.getItem("bytecoin-ton-address")}`)
 		let result_json = await users_result.json()
 
 		let result = result_json.result
-		console.log(tonConnectUI.connected)
 
 		if (result_json.ok == "true") {
 			setMinerInfo({
@@ -34,7 +39,8 @@ function App() {
 				balance: result_json.result.balance == undefined ? 0 : result_json.result.balance,
 				nfts: result_json.result.nft_list == undefined ? [] : result_json.result.nft_list
 			})
-		} else if (tonConnectUI.connected == false) {
+			console.log('Read MinerInfo')
+		} else if (result_json.ok == "false") {
 			setMinerInfo({
 				miners_amount: 0,
 				battery_amount: 0,
@@ -53,8 +59,8 @@ function App() {
 				epoch: result_parse.epoch_number,
 				miners_nft_count: result_parse.miners_nft_count
 			})
+			console.log('Read ProtocolInfo')
 		}
-		console.log('Read info')
 	}
 
 	setOptions({
@@ -69,6 +75,17 @@ function App() {
 	})
 
 	useEffect(() => {
+		if (tonConnectUI.connected == false) {
+			setMinerInfo({
+				miners_amount: 0,
+				battery_amount: 0,
+				bytecoins_amount: 0,
+				balance: 0,
+				nfts: []
+			})
+			console.log("DEBUG: CLEAR: LOCALSTORAGE")
+			localStorage.removeItem("bytecoin-ton-address")
+		}
 		main()
 	}, [wallet])
 
@@ -79,7 +96,7 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		var t = setInterval(main, 10000);
+		var t = setInterval(main, 15000);
 	}, [])
 
 	return (

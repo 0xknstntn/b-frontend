@@ -23,24 +23,28 @@ export const Header = () => {
 
     useEffect(() => {
         async function main() {
-             let response = await fetch('https://api.telegram.org/bot6607875459:AAF8sNqCYCcoNjMzj6jVBxY_D7Wupjg23dQ/getUserProfilePhotos', {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ user_id: /*'765798766'*/ window.Telegram.WebApp.initDataUnsafe.user?.id  })
-             })
-             const content = await response.json();
+            try {
+                let response = await fetch('https://api.telegram.org/bot6607875459:AAF8sNqCYCcoNjMzj6jVBxY_D7Wupjg23dQ/getUserProfilePhotos', {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ user_id: /*'765798766'*/ window.Telegram.WebApp.initDataUnsafe.user?.id  })
+                })
+                const content = await response.json();
 
-             let file_id = content.result.photos[0][2].file_id
+                let file_id = content.result.photos[0][2].file_id
 
-             let response2 = await fetch(`https://api.telegram.org/bot6607875459:AAF8sNqCYCcoNjMzj6jVBxY_D7Wupjg23dQ/getFile?file_id=${file_id}`)
-             const content2 = await response2.json();
+                let response2 = await fetch(`https://api.telegram.org/bot6607875459:AAF8sNqCYCcoNjMzj6jVBxY_D7Wupjg23dQ/getFile?file_id=${file_id}`)
+                const content2 = await response2.json();
 
-             let file_path = content2.result.file_path
+                let file_path = content2.result.file_path
 
-             setLogo(`https://api.telegram.org/file/bot6607875459:AAF8sNqCYCcoNjMzj6jVBxY_D7Wupjg23dQ/${file_path}`)
+                setLogo(`https://api.telegram.org/file/bot6607875459:AAF8sNqCYCcoNjMzj6jVBxY_D7Wupjg23dQ/${file_path}`)
+            } catch (e) {
+                console.error("Cant load tg logo")
+            }
          }
         main()
     }, [])
