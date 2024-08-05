@@ -6,6 +6,7 @@ import { useMinersInfo } from "../../../store/useProtocol";
 import { BytecoinProtocolAddress, BytecoinApiURL } from "../../../utils/const";
 import { SendTransactionRequest, useTonAddress, useTonConnectUI } from "@tonconnect/ui-react";
 import { defaultSize, getInputSize } from "../../../store/useInputSize";
+import { toFixed } from "../../../utils/utils";
 
 
 export interface InputSize {
@@ -222,7 +223,7 @@ export const WithdrawAmountBYTE = () => {
                                     <WithdrawNameToken>BYTE</WithdrawNameToken> </>
                             }
                         </InputContainer>
-                        <AmountOnBalance>{(miner_info.bytecoins_amount).toFixed(3)} BYTE on balance</AmountOnBalance>
+                        <AmountOnBalance>{toFixed(miner_info.bytecoins_amount, 3)} BYTE on balance</AmountOnBalance>
                     </AmountContainer>
                 </div>
             </Container>
