@@ -21,7 +21,7 @@ const Container = styled.div`
 `
 
 const routes = [
-    { path: '/', name: 'MainPage', element: <MainPage />, nodeRef: createRef() },
+    { path: '/', name: 'MainPage', element: <MainPage /> },
     { path: '/depositminer', element: <DepositMiner /> },
     { path: '/buybattery', element: <BuyBattery /> },
     { path: '/withdraw', element: <Withdraw /> },
