@@ -19,6 +19,16 @@ function App() {
 	const [tonConnectUI, setOptions] = useTonConnectUI();
 	const [isLoading, setIsLoading] = useState(true);
 
+	setOptions({
+		actionsConfiguration: {
+			notifications: [],
+
+		},
+		uiPreferences: {
+			theme: THEME.LIGHT
+		}
+	})
+
 	async function main() {
 		if (userFriendlyAddress != "") {
 			localStorage.setItem("bytecoin-ton-address", userFriendlyAddress)
@@ -62,17 +72,6 @@ function App() {
 			console.log('Read ProtocolInfo')
 		}
 	}
-
-	setOptions({
-		actionsConfiguration: {
-			notifications: [],
-
-		},
-		uiPreferences: {
-			theme: THEME.LIGHT
-		}
-
-	})
 
 	useEffect(() => {
 		if (tonConnectUI.connected == false) {

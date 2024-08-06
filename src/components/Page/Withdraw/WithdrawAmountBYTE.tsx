@@ -229,7 +229,7 @@ export const WithdrawAmountBYTE = () => {
             </Container>
             <ButtonContainer>
                 {
-                    (amount != "" && Number(amount) != 0 && Number(amount) > 4) ?
+                    (amount != "" && Number(amount) != 0) ?
                         Number(amount) <= miner_info.bytecoins_amount ?
                             <Links> <ActiveConfirm onClick={() => {
                                 WithdrawalByteAction(amount)
