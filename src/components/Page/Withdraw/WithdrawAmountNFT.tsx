@@ -236,7 +236,7 @@ export const WithdrawAmountNFT = () => {
                             Number(amount) <= miner_info.miners_amount ?
                                 <Links><ActiveConfirm onClick={() => WithdrawalNFTAction(Number(amount))}>CONTINUE</ActiveConfirm></Links>
                                 : <NonActiveConfirm>Not enough funds</NonActiveConfirm>
-                            : <NonActiveConfirm>Max 4 transactions can be sent</NonActiveConfirm>
+                            : <NonActiveConfirm>No more than 4 NFTs per attempt</NonActiveConfirm>
                         : <NonActiveConfirm>CONTINUE</NonActiveConfirm>
                 }
             </ButtonContainer>
