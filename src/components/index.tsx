@@ -20,22 +20,28 @@ const Container = styled.div`
     align-items: center;
 `
 
+const routes = [
+    { path: '/', name: 'MainPage', element: <MainPage />, nodeRef: createRef() },
+    { path: '/depositminer', element: <DepositMiner /> },
+    { path: '/buybattery', element: <BuyBattery /> },
+    { path: '/withdraw', element: <Withdraw /> },
+    { path: '/withdrawamount/BYTE', element: <WithdrawAmountBYTE /> },
+    { path: '/withdrawamount/NFT', element: <WithdrawAmountNFT /> },
+    { path: '/SuccessWithdrawBYTE', element: <SuccessWithdrawBYTE /> },
+    { path: '/SuccessWithdrawNFT', element: <SuccessWithdrawNFT /> },
+    { path: '/SuccessDeposit', element: <SuccessDeposit /> },
+    { path: '/SuccessBuying', element: <SuccessBuying /> }
+]
+
 
 export const Index = () => {
     return (
         <Container>
             <Header />
             <Routes>
-                <Route path="/" element={<MainPage />} />
-                <Route path="/depositminer" element={<DepositMiner />} />
-                <Route path="/buybattery" element={<BuyBattery />} />
-                <Route path="/withdraw" element={<Withdraw />} />
-                <Route path="/withdrawamount/BYTE" element={<WithdrawAmountBYTE />} />
-                <Route path="/withdrawamount/NFT" element={<WithdrawAmountNFT />} />
-                <Route path="/SuccessWithdrawBYTE" element={<SuccessWithdrawBYTE />} />
-                <Route path="/SuccessWithdrawNFT" element={<SuccessWithdrawNFT />} />
-                <Route path="/SuccessDeposit" element={<SuccessDeposit />} />
-                <Route path="/SuccessBuying" element={<SuccessBuying />} />
+                {routes.map(({ path, element }) =>
+                    <Route key={path} path={path} element={element} />
+                )}
             </Routes>
         </Container>
     )
