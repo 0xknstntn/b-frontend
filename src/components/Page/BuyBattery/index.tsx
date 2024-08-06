@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useMinersInfo } from "../../../store/useProtocol";
 import { useTonAddress, useTonConnectUI } from "@tonconnect/ui-react";
 import { defaultSize, getInputSize } from "../../../store/useInputSize";
+import { BatteryPrice } from "../../../utils/const";
 
 
 export interface InputSize {
@@ -177,7 +178,7 @@ export const BuyBattery = () => {
 
     const BuyBatteries = (amount: string) => {
         let number_amount = Number(amount)
-        let parsed_amount = ((number_amount * 2) + 0.05) * 10**9
+        let parsed_amount = ((number_amount * BatteryPrice) + 0.05) * 10**9
         const myTransaction = {
             validUntil: Math.floor(Date.now() / 1000) + 300,
             messages: [
@@ -220,7 +221,7 @@ export const BuyBattery = () => {
                     </NameContainer>
                     <AmountContainer>
                         <InputContainer ref={refBlock}>
-                            { ((Number(amount) * 2 > (miner_info.balance / 10**9)) || ( miner_info.miners_amount == 0 )) && (Number(amount) != 0) ? 
+                            { ((Number(amount) * BatteryPrice > (miner_info.balance / 10**9)) || ( miner_info.miners_amount == 0 )) && (Number(amount) != 0) ? 
                                 <> 
                                 <Input 
                                 value={amount} 
@@ -245,7 +246,7 @@ export const BuyBattery = () => {
                                 <WithdrawNameToken>batteries</WithdrawNameToken> </> 
                             }
                         </InputContainer>
-                        <AmountOnBalance>1 Battery ≈ 2 TON</AmountOnBalance>
+                        <AmountOnBalance>1 Battery ≈ {BatteryPrice} TON</AmountOnBalance>
                     </AmountContainer>
                 </div>
             </Container>
@@ -259,10 +260,10 @@ export const BuyBattery = () => {
             <ButtonContainer>
                 {
                     Number(amount) != 0 ? 
-                        (Number(amount) * 2 < (miner_info.balance / 10**9)) ?
+                        ((Number(amount) * BatteryPrice) < (miner_info.balance / 10**9)) ?
                             <Links><ActiveConfirm onClick={
                                 () => BuyBatteriesAction(amount)
-                            }>Buy for {Number(amount) * 2} <LogoInButton src={TonLogo}/></ActiveConfirm></Links> 
+                            }>Buy for {Number(amount) * BatteryPrice} <LogoInButton src={TonLogo}/></ActiveConfirm></Links> 
                         : <NonActiveConfirm>Not enough funds</NonActiveConfirm>
                     : 
                         <NonActiveConfirm>Enter the number of batteries</NonActiveConfirm>}
