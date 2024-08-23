@@ -3,6 +3,7 @@ import BuyMoreMiners from '../../../assets/BuyMoreMiners.webp'
 import { useMinersInfo, useProtocolInfo } from "../../../store/useProtocol";
 import { useState } from "react";
 import { formatCash } from "../../../utils/utils";
+import { GetgemsCollectionAddress } from "../../../utils/const";
 
 const MainMinerContainer = styled.div`
     width: 100%;
@@ -90,7 +91,7 @@ export const MinerBlock = () => {
                             } BYTE per 1 day</GreyText>
                         }
                     </AmountInfo>
-                    <a href="https://testnet.getgems.io/collection/EQD9P8RuqjJmLVDwen_tKSgeW5VuNXndmRfgUdzRF8oIMW5y">
+                    <a href={GetgemsCollectionAddress}>
                         <BuyMiners loading="lazy" src={BuyMoreMiners}/>
                     </a>
                 </ASICContainer>
